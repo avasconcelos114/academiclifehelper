@@ -6,6 +6,7 @@ body {
   color: #000;
   padding-left: 15px;
   padding-right: 15px;
+  margin: 0px !important;
 }
 .activity-input {
   border: none;
@@ -53,9 +54,10 @@ body {
   background-color: #fcfcfb;
   border-radius: 6px;
   border: 1px solid #f4f4f4;
-  padding: 25px;
   height: 100%;
-  margin: 20px 0px 20px 0px;
+  padding: 25px;
+  margin: 20px 10px 20px 10px;
+  height: 100%;
 }
 .delete-activity {
 

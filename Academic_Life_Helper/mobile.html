@@ -1,0 +1,60 @@
+<html ng-app="app" ng-controller="indexController">
+  <head>
+    <title>Academic Life Helper</title>
+    <meta charset="utf-8" />
+    <base href='/Academic_Life_Helper/'/>
+    <!-- Web fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <!-- Styles -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" ng-href="css/mobile.css">
+    <link rel="stylesheet" ng-href="css/fixed-style.css">
+    <link rel="stylesheet" ng-href="css/bootstrap.css">
+    <!-- Imports -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="js/app.module.js"></script>
+
+    <!-- Services -->
+    <script src="js/indexService.js"></script>
+
+    <!-- Factories -->
+    <script src="js/personFactory.js"></script>
+    <script src="js/activityFactory.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/greetingController.js"></script>
+    <script src="js/todoListController.js"></script>
+    <script src="js/indexController.js"></script>
+    <script src="js/activitiesController.js"></script>
+
+  </head>
+  <body ng-controller="activitiesController">
+    <div layout="row">
+      <div flex="100">
+        <ul class="list-area">
+          <li
+            style="cursor: pointer"
+            md-swipe-right="removeActivityMobile(activity)"
+            ng-class="activity_li_class"
+            ng-click="selectActivity(activity)"
+            ng-repeat="activity in activities"
+          >
+            <span>{{ activity.name }}</span>
+          </li>
+        </ul>
+        <p class="repeat-alarm" ng-show="showRepeatAlarm">Name has to be unique!</p>
+
+      </div>
+    </div>
+    <div class="selector-container" layout="row">
+      <input class="activity-input" ng-change="printValue()" placeholder="Type your activities here!" type="text" ng-model="activity_input" ng-enter="addActivity()" ng-blur="addActivity()" />
+      <div class="bottom-selector"></div>
+      <div class="bottom-selector"></div>
+    </div>
+  </body>
+</html>

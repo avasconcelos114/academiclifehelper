@@ -5,6 +5,7 @@ body {
   color: #000;
   padding-left: 15px;
   padding-right: 15px;
+  margin: 0px !important;
 }
 .activity-input {
   border: none;
@@ -53,8 +54,8 @@ body {
   border-radius: 6px;
   border: 1px solid #fff;
   padding: 25px;
+  margin: 20px 10px 20px 10px;
   height: 100%;
-  margin: 20px 0px 20px 0px;
 }
 .greeting-msg {
   color: #ff005c;

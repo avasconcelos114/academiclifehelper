@@ -41,6 +41,23 @@ html, body {
 .flex-padding {
   padding: 10px;
 }
+.list-area {
+  width: 100%;
+  height: -moz-calc(100% - 230px);
+  height: -webkit-calc(100% - 230px);
+  height: -o-calc(100% - 230px);
+  height: calc(100% - 230px);
+  padding: 0px;
+}
+.list-item {
+  list-style-type: none;
+  font-size: 45px;
+  text-indent: 25px;
+  line-height: 90px;
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #e1e2e4;
+}
 .row-height {
   display: table;
   table-layout: fixed;
@@ -70,4 +87,39 @@ html, body {
 .selected-style {
   border-color: blue;
   box-shadow: 0 0 10px blue;
+}
+.selector-container {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+.bottom-selector {
+  width: 50%;
+  height: 200px;
+  border: 2px solid #536d84;
+  display: table-cell;
+}
+.bottom-selector-selected {
+  width: 50%;
+  height: 125px;
+  background-color: #536d84;
+  border: 2px solid #536d84;
+  display: table-cell;
+}
+.activity-input {
+  border: none;
+  border-radius: 0px !important;
+  outline: none;
+  background-color: #eee;
+  height: 100px;
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+  color: #ff005c;
+  border-bottom: 3px solid #536d84;
+  text-indent: 10px;
+  margin: 0;
+  border-radius: 4px;
+  position: fixed;
+  right: 5px;
 }

@@ -1,18 +1,22 @@
 <html ng-app="app" ng-controller="indexController">
   <head>
-    <title>Angular Course</title>
+    <title>Academic Life Helper</title>
     <meta charset="utf-8" />
-    <base href='/angularClass/'/>
-    <!-- Styles -->
+    <base href='/Academic_Life_Helper/'/>
+    <!-- Web fonts -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-
+    <!-- Styles -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link rel="stylesheet" ng-href="css/{{ selectedSheet }}.css">
     <link rel="stylesheet" ng-href="css/fixed-style.css">
     <link rel="stylesheet" ng-href="css/bootstrap.css">
     <!-- Imports -->
-    <script src="js/angular.min.js"></script>
-    <script src="js/angular-sanitize.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <script src="js/app.module.js"></script>
 
     <!-- Services -->
@@ -28,12 +32,18 @@
     <script src="js/indexController.js"></script>
     <script src="js/activitiesController.js"></script>
 
+    <script type="text/javascript">
+      // load mobile version instead
+      if (screen.width <= 699) {
+        document.location = "mobile.html";
+      }
+      </script>
+
   </head>
   <body  ng-controller="greetingController" >
     <div ng-controller="activitiesController" class="container-fluid">
-      <div class="row">
-        <div class="row-height">
-          <div class="col-sm-5 col-md-3 col-height">
+      <div class="max-height" layout="row">
+          <div hide-sm flex="25" class="max-height" >
             <div class="body-container">
               <div ng-class="selectedSheet === 'index-dark' ? 'style-selector color-type1 selected-style' : 'style-selector color-type1'" ng-click="changeCss('index-dark')"></div>
               <div ng-class="selectedSheet === 'index-coffee' ? 'style-selector color-type2 selected-style' : 'style-selector color-type2'" ng-click="changeCss('index-coffee')"></div>
@@ -62,12 +72,12 @@
             </div>
           </div>
 
-          <div class="col-sm-7 col-md-9 col-height">
-            <div class="body-container" >
-              <h1 class="activity-header" ng-show="selectedActivityIndex != -1">{{ activities[selectedActivityIndex].name }}<br /></h1>
+          <div flex="75" flex-sm="100" class="max-height">
+            <div  style="overflow: hidden;" class="body-container" >
+              <h1 class="activity-header" ng-show="selectedActivityIndex != -1">{{ activities[selectedActivityIndex].name }}</h1>
               <h2 class="activity-header" ng-show="selectedActivityIndex != -1">To-dos</h2>
-              <div class="row">
-                <div class="col-sm-4 col-md-4 col-height-half">
+              <div layout="row">
+                <div class="flex-padding half-height" flex="33">
                   <div ng-show="selectedActivityIndex != -1">
                     <h2 class="section-header">Assignments</h2>
                     <p class="task-counter">You currently have {{ assignments.length }} assignments remaining.</p>
@@ -85,7 +95,7 @@
                   </div>
                 </div>
 
-                <div class="col-sm-4 col-md-4 col-height-half">
+                <div class="flex-padding half-height" flex="33">
                   <div ng-show="selectedActivityIndex != -1">
                     <h2 class="section-header">Meetings</h2>
                     <p class="task-counter">You currently have {{ meetings.length }} meetings remaining.</p>
@@ -103,9 +113,9 @@
                   </div>
                 </div>
 
-                <div class="col-sm-4 col-md-4 col-height-half">
+                <div class="flex-padding half-height" flex="33">
                   <div ng-show="selectedActivityIndex != -1">
-                    <h2 class="section-header">Exams & Quizzes</h2>
+                    <h2 class="section-header">Exams</h2>
                     <p class="task-counter">You currently have {{ exams.length }} exams remaining.</p>
                     <ul style="max-height: 285px; overflow-y: auto; padding-left: 0px; overflow-x: hidden">
                       <li class="list-item" ng-repeat="exam in exams">
@@ -121,10 +131,9 @@
                   </div>
                 </div>
               </div>
-
-              <div class="row">
-                <h2 class="activity-header" ng-show="selectedActivityIndex != -1">Completed</h2>
-                <div class="col-sm-4 col-md-4 col-height-half">
+              <h2 class="activity-header" ng-show="selectedActivityIndex != -1">Completed</h2>
+              <div layout="row">
+                <div class="flex-padding half-height" flex="33">
                   <div ng-show="selectedActivityIndex != -1">
                     <h2 class="section-header">Assignments</h2>
                     <p class="task-counter">You currently have {{ completed_assignments.length }} assignments completed.</p>
@@ -136,7 +145,7 @@
                   </div>
                 </div>
 
-                <div class="col-sm-4 col-md-4 col-height-half">
+                <div class="flex-padding half-height" flex="33">
                   <div ng-show="selectedActivityIndex != -1">
                     <h2 class="section-header">Meetings</h2>
                     <p class="task-counter">You currently have {{ completed_meetings.length }} meetings completed.</p>
@@ -148,9 +157,9 @@
                   </div>
                 </div>
 
-                <div class="col-sm-4 col-md-4 col-height-half">
+                <div class="flex-padding half-height" flex="33">
                   <div ng-show="selectedActivityIndex != -1">
-                    <h2 class="section-header">Exams & Quizzes</h2>
+                    <h2 class="section-header">Exams</h2>
                     <p class="task-counter">You currently have {{ completed_exams.length }} exams completed.</p>
                     <ul style="max-height: 285px; overflow-y: auto; padding-left: 0px; overflow-x: hidden">
                       <li class="list-item" ng-repeat="exam in completed_exams">
@@ -164,7 +173,6 @@
             </div>
           </div>
 
-        </div>
       </div>
     </div>
   </body>

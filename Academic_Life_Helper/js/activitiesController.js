@@ -18,6 +18,10 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
   $scope.showRepeatAlarmMeeting = false;
   $scope.showRepeatAlarmExam = false;
 
+  // mobile input variables
+  $scope.activity_li_class = "list-item"
+
+
   // Activity Controls
   $scope.selectActivity = function(activity_name) {
     $scope.selectedActivityIndex = $scope.activities.indexOf(activity_name);
@@ -140,4 +144,19 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
     // Add to completed assignment array
     $scope.completed_exams.push(exam_name);
   }
+  // mobile control
+  $scope.removeActivityMobile = function(activity_name) {
+    var index = $scope.activities.indexOf(activity_name);
+    if ( $scope.activities[index].name === activity_name) {
+        $scope.activity_li_class = ''
+    }
+    if (confirm('Would you like to remove this activity?')) {
+      $scope.activities.splice(index, 1);
+      $scope.assignments = [];
+      $scope.meetings = [];
+      $scope.exams = [];
+      $scope.selectedActivityIndex = -1;
+    }
+    };
+
 }]);
