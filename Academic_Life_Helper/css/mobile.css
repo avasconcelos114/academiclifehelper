@@ -9,52 +9,83 @@ html, body {
 .activity-icon-selected {
   background: url("../img/mobile-activity-selected.png") no-repeat 50% 50%;
 }
-.max-height {
-  height: 95%;
+.activity-input {
+  border: none;
+  border-radius: 0px !important;
+  outline: none;
+  background-color: #eee;
+  height: 100px;
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+  color: #ff005c;
+  text-indent: 10px;
+  margin: 0;
+  border-radius: 4px;
+  position: fixed;
 }
-.half-height {
-  height: 45%;
-}
-.complete-activity {
-  display: inline-block;
-  float: right;
-  margin-right: 5px;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background: url(../img/complete-icon.png) no-repeat 50% 50%;
+.assignment-completed {
+  background-color: green !important;
   color: #fff;
-  margin-top: 8px;
-  cursor: pointer;
 }
-.complete-activity:hover {
-  background: url(../img/complete-icon-hover.png) no-repeat 50% 50%;
+.bottom-selector {
+  width: 50%;
+  height: 120px;
+  border: 2px solid #536d84;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
 }
-
-.delete-activity {
-  display: inline-block;
+.bottom-selector-selected {
+  width: 50%;
+  height: 120px;
+  background-color: #536d84 !important;
+  border: 2px solid #536d84;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+.color-type1 {
+  background-color: #2a2a2a;
+}
+.color-type2 {
+  background-color: #94887e;
+}
+.color-type3 {
+  background-color: #e1e2e4;
+}
+.complete-icon-area {
   float: right;
-  margin-right: 5px;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background: url(../img/delete-icon.png) no-repeat 50% 50%;
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  height: 97px;
+  width: 300px;
+  background-color: green;
   color: #fff;
-  margin-top: 8px;
-  cursor: pointer;
+  bottom: 100px;
+  text-align: center;
 }
-.delete-activity:hover {
-  background: url(../img/delete-icon-hover.png) no-repeat 50% 50%;
+.delete-area {
+  float: left;
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  height: 97px;
+  width: 300px;
+  background-color: red;
+  color: #fff;
+  text-align: center;
 }
 .flex-padding {
   padding: 10px;
 }
 .list-area {
   width: 100%;
-  height: -moz-calc(100% - 230px);
+  height:    -moz-calc(100% - 230px);
   height: -webkit-calc(100% - 230px);
-  height: -o-calc(100% - 230px);
-  height: calc(100% - 230px);
+  height:      -o-calc(100% - 230px);
+  height:         calc(100% - 230px);
   padding: 0px;
   overflow-x: hidden;
 }
@@ -73,19 +104,10 @@ html, body {
   display: block;
   background: #fff;
   z-index: 100;
-  border-top: 1px solid #e1e2e4;
+  border-top:    1px solid #e1e2e4;
   border-bottom: 1px solid #e1e2e4;
   text-indent: -200px;
   position: relative;
-}
-.delete-area {
-  float: left;
-  position: relative;
-  z-index: 1;
-  height: 97px;
-  width: 300px;
-  background-color: red;
-  color: #fff;
 }
 .row-height {
   display: table;
@@ -124,7 +146,7 @@ html, body {
 .slide-right {
   position: relative;
   -webkit-animation: slideRight 0.5s 1; /* Safari 4.0 - 8.0 */
-  animation: slideRight 0.5s 1;
+  animation:         slideRight 0.5s 1;
   animation-fill-mode: forwards;
 }
 /* Safari 4.0 - 8.0 */
@@ -132,20 +154,10 @@ html, body {
     0%   {left:0px; top:0px;}
     100% {left:300px; top:0px;}
 }
-
 /* Standard syntax */
 @keyframes slideRight {
     0%   {left:0px; top:0px;}
     100% {left:300px; top:0px;}
-}
-.color-type1 {
-  background-color: #2a2a2a;
-}
-.color-type2 {
-  background-color: #94887e;
-}
-.color-type3 {
-  background-color: #e1e2e4;
 }
 .selected-style {
   border-color: blue;
@@ -156,38 +168,6 @@ html, body {
   bottom: 0px;
   width: 100%;
   display: table;
-}
-.bottom-selector {
-  width: 50%;
-  height: 120px;
-  border: 2px solid #536d84;
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}
-.bottom-selector-selected {
-  width: 50%;
-  height: 120px;
-  background-color: #536d84 !important;
-  border: 2px solid #536d84;
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}
-.activity-input {
-  border: none;
-  border-radius: 0px !important;
-  outline: none;
-  background-color: #eee;
-  height: 100px;
-  width: 100%;
-  text-align: center;
-  font-size: 50px;
-  color: #ff005c;
-  text-indent: 10px;
-  margin: 0;
-  border-radius: 4px;
-  position: fixed;
 }
 .task-icon {
   background: url("../img/mobile-task-light.png") no-repeat 50% 50%;

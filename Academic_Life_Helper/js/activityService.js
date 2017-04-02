@@ -1,0 +1,4 @@
+app.service('activityService', function() {
+
+
+});

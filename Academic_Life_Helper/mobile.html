@@ -21,7 +21,7 @@
 
     <!-- Services -->
     <script src="js/indexService.js"></script>
-
+    <script src="js/activityService.js"></script>
     <!-- Factories -->
     <script src="js/personFactory.js"></script>
     <script src="js/activityFactory.js"></script>
@@ -30,10 +30,10 @@
     <script src="js/greetingController.js"></script>
     <script src="js/todoListController.js"></script>
     <script src="js/indexController.js"></script>
-    <script src="js/activitiesController.js"></script>
+    <script src="js/activitiesMobileController.js"></script>
 
   </head>
-  <body ng-controller="activitiesController">
+  <body ng-controller="activitiesMobileController">
 
     <div ng-show="is_show_activity" layout="row">
       <div flex="100">
@@ -43,7 +43,7 @@
             class="list-item"
             ng-repeat="activity in activities"
           >
-            <div ng-click="removeActivityMobile(activity)" class="delete-area">
+            <div ng-click="removeActivity(activity)" class="delete-area">
               Delete
             </div>
             <span
@@ -69,16 +69,20 @@
             class="list-item"
             ng-repeat="assignment in assignments"
           >
-            <div ng-click="removeAssignmentMobile(assignment)" class="delete-area">
+            <div ng-click="removeAssignment(assignment)" class="delete-area">
               Delete
             </div>
             <span
             id="assignment_item_{{$index}}"
             md-swipe-right="slideRightActivity('assignment_item_{{$index}}')"
             md-swipe-left="SlideLeftActivity('assignment_item_{{$index}}')"
+            ng-class="assignment.status === 'COMPLETED' ? 'assignment-completed' : '' "
             >
-              {{ assignment }}
+              {{ assignment.name }}
             </span>
+            <div ng-click="completeAssignment(assignment, 'assignment_item_' + $index)" class="complete-icon-area">
+              Complete
+            </div>
           </li>
         </ul>
       </div>
@@ -88,12 +92,12 @@
       <div style="display: table-row; height: 100px; width: 100%">
         <input ng-show="is_show_activity" class="activity-input" placeholder="Type your activities here!" type="text" ng-model="activity_input" ng-enter="addActivity()" ng-blur="addActivity()" />
         <input ng-show="is_show_task" class="activity-input" placeholder="Type your assignments here!" type="text" ng-model="assignment_input" ng-enter="addAssignment()" ng-blur="addAssignment()" />
-        </div>
-        <div style="display: table-row; height: 100px; width: 100%">
-          <div ng-click="toggleSelectActivity()" ng-class="activity_selector_class"></div>
-          <div ng-click="toggleSelectTask()" ng-class="task_selector_class"></div>
-        </div>
       </div>
+      <div style="display: table-row; height: 100px; width: 100%">
+        <div ng-click="toggleSelectActivity()" ng-class="activity_selector_class"></div>
+        <div ng-click="toggleSelectTask()" ng-class="task_selector_class"></div>
+      </div>
+    </div>
 
     </div>
   </body>

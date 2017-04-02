@@ -1,6 +1,5 @@
-app.controller('indexController', [ '$scope', 'operations', 'Person', function($scope){
+app.controller('indexController', [ '$scope', 'Person', function($scope){
 
-  
   $scope.selectedSheet = "index-light";
 
   $scope.changeCss = function(sheet){
