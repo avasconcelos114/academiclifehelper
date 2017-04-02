@@ -1,6 +1,14 @@
 html, body {
   font-family: 'Source Sans Pro', Roboto !important;
 }
+
+.activity-icon {
+  background: url("../img/mobile-activity-light.png") no-repeat 50% 50%;
+  background-size: 70px 70px;
+}
+.activity-icon-selected {
+  background: url("../img/mobile-activity-selected.png") no-repeat 50% 50%;
+}
 .max-height {
   height: 95%;
 }
@@ -61,19 +69,20 @@ html, body {
 }
 .list-item span {
   width: 100%;
-  height: 100%;
+  height: 100px;
   display: block;
   background: #fff;
   z-index: 100;
+  border-top: 1px solid #e1e2e4;
+  border-bottom: 1px solid #e1e2e4;
+  text-indent: -200px;
   position: relative;
 }
 .delete-area {
   float: left;
-  border-bottom: 1px solid #e1e2e4;
-  border-top: 1px solid #e1e2e4;
   position: relative;
   z-index: 1;
-  height: 100%;
+  height: 97px;
   width: 300px;
   background-color: red;
   color: #fff;
@@ -146,19 +155,24 @@ html, body {
   position: fixed;
   bottom: 0px;
   width: 100%;
+  display: table;
 }
 .bottom-selector {
   width: 50%;
-  height: 200px;
+  height: 120px;
   border: 2px solid #536d84;
   display: table-cell;
+  text-align: center;
+  vertical-align: middle;
 }
 .bottom-selector-selected {
   width: 50%;
-  height: 125px;
-  background-color: #536d84;
+  height: 120px;
+  background-color: #536d84 !important;
   border: 2px solid #536d84;
   display: table-cell;
+  text-align: center;
+  vertical-align: middle;
 }
 .activity-input {
   border: none;
@@ -170,10 +184,14 @@ html, body {
   text-align: center;
   font-size: 50px;
   color: #ff005c;
-  border-bottom: 3px solid #536d84;
   text-indent: 10px;
   margin: 0;
   border-radius: 4px;
   position: fixed;
-  right: 5px;
+}
+.task-icon {
+  background: url("../img/mobile-task-light.png") no-repeat 50% 50%;
+}
+.task-icon-selected {
+  background: url("../img/mobile-task-selected.png") no-repeat 50% 50%;
 }

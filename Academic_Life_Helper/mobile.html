@@ -34,7 +34,8 @@
 
   </head>
   <body ng-controller="activitiesController">
-    <div layout="row">
+
+    <div ng-show="is_show_activity" layout="row">
       <div flex="100">
         <ul class="list-area">
           <li
@@ -47,7 +48,7 @@
             </div>
             <span
             id="activity_item_{{$index}}"
-            ng-click="selectActivity(activity)"
+            ng-click="selectActivityMobile(activity)"
             md-swipe-right="slideRightActivity('activity_item_{{$index}}')"
             md-swipe-left="SlideLeftActivity('activity_item_{{$index}}')"
             >
@@ -59,10 +60,41 @@
 
       </div>
     </div>
-    <div class="selector-container" layout="row">
-      <input class="activity-input" ng-change="printValue()" placeholder="Type your activities here!" type="text" ng-model="activity_input" ng-enter="addActivity()" ng-blur="addActivity()" />
-      <div class="bottom-selector"></div>
-      <div class="bottom-selector"></div>
+
+    <div ng-show="is_show_task" layout="row">
+      <div flex="100">
+        <ul class="list-area">
+          <li
+            style="cursor: pointer"
+            class="list-item"
+            ng-repeat="assignment in assignments"
+          >
+            <div ng-click="removeAssignmentMobile(assignment)" class="delete-area">
+              Delete
+            </div>
+            <span
+            id="assignment_item_{{$index}}"
+            md-swipe-right="slideRightActivity('assignment_item_{{$index}}')"
+            md-swipe-left="SlideLeftActivity('assignment_item_{{$index}}')"
+            >
+              {{ assignment }}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="selector-container">
+      <div style="display: table-row; height: 100px; width: 100%">
+        <input ng-show="is_show_activity" class="activity-input" placeholder="Type your activities here!" type="text" ng-model="activity_input" ng-enter="addActivity()" ng-blur="addActivity()" />
+        <input ng-show="is_show_task" class="activity-input" placeholder="Type your assignments here!" type="text" ng-model="assignment_input" ng-enter="addAssignment()" ng-blur="addAssignment()" />
+        </div>
+        <div style="display: table-row; height: 100px; width: 100%">
+          <div ng-click="toggleSelectActivity()" ng-class="activity_selector_class"></div>
+          <div ng-click="toggleSelectTask()" ng-class="task_selector_class"></div>
+        </div>
+      </div>
+
     </div>
   </body>
 </html>
