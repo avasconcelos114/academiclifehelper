@@ -39,12 +39,20 @@
         <ul class="list-area">
           <li
             style="cursor: pointer"
-            md-swipe-right="removeActivityMobile(activity)"
-            ng-class="activity_li_class"
-            ng-click="selectActivity(activity)"
+            class="list-item"
             ng-repeat="activity in activities"
           >
-            <span>{{ activity.name }}</span>
+            <div ng-click="removeActivityMobile(activity)" class="delete-area">
+              Delete
+            </div>
+            <span
+            id="activity_item_{{$index}}"
+            ng-click="selectActivity(activity)"
+            md-swipe-right="slideRightActivity('activity_item_{{$index}}')"
+            md-swipe-left="SlideLeftActivity('activity_item_{{$index}}')"
+            >
+              {{ activity.name }}
+            </span>
           </li>
         </ul>
         <p class="repeat-alarm" ng-show="showRepeatAlarm">Name has to be unique!</p>

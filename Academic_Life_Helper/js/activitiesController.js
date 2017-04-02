@@ -21,7 +21,6 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
   // mobile input variables
   $scope.activity_li_class = "list-item"
 
-
   // Activity Controls
   $scope.selectActivity = function(activity_name) {
     $scope.selectedActivityIndex = $scope.activities.indexOf(activity_name);
@@ -29,7 +28,7 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
     $scope.assignments = $scope.activities[$scope.selectedActivityIndex].assignments;
     $scope.meetings = $scope.activities[$scope.selectedActivityIndex].meetings;
     $scope.exams = $scope.activities[$scope.selectedActivityIndex].exams;
-  }
+  };
 
   $scope.addActivity = function(){
     $scope.activity = new Activity();
@@ -45,7 +44,7 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
         $scope.showRepeatAlarm = true;
       }
     }
-  }
+  };
 
   $scope.removeActivity = function(activity_name){
     var index = $scope.activities.indexOf(activity_name);
@@ -57,7 +56,7 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
       $scope.exams = [];
       $scope.selectedActivityIndex = -1;
     }
-  }
+  };
 
   // Assignment Controls
   $scope.addAssignment = function(){
@@ -71,14 +70,13 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
         $scope.showRepeatAlarmAssignment = true;
       }
     }
-  }
+  };
 
   $scope.removeAssignment = function(assignment_name) {
     var index = $scope.assignments.indexOf(assignment_name);
 
     $scope.assignments.splice(index, 1);
-
-  }
+  };
 
   $scope.completeAssignment = function(assignment_name) {
     // Remove from to-do assignment array
@@ -86,7 +84,7 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
     $scope.assignments.splice(index, 1);
     // Add to completed assignment array
     $scope.completed_assignments.push(assignment_name);
-  }
+  };
 
   // Meeting Controls
   $scope.addMeeting = function(){
@@ -100,14 +98,13 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
         $scope.showRepeatAlarmMeeting = true;
       }
     }
-  }
+  };
 
   $scope.removeMeeting = function(meeting_name) {
     var index = $scope.meetings.indexOf(meeting_name);
 
     $scope.meetings.splice(index, 1);
-
-  }
+  };
 
   $scope.completeMeeting = function(meeting_name) {
     // Remove from to-do assignment array
@@ -115,7 +112,7 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
     $scope.meetings.splice(index, 1);
     // Add to completed assignment array
     $scope.completed_meetings.push(meeting_name);
-  }
+  };
 
   // Exam Controls
   $scope.addExam = function(){
@@ -129,13 +126,13 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
         $scope.showRepeatAlarmExam = true;
       }
     }
-  }
+  };
 
   $scope.removeExam = function(exams_name) {
     var index = $scope.exams.indexOf(exams_name);
 
     $scope.exams.splice(index, 1);
-  }
+  };
 
   $scope.completeExam = function(exam_name) {
     // Remove from to-do assignment array
@@ -143,13 +140,28 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
     $scope.exams.splice(index, 1);
     // Add to completed assignment array
     $scope.completed_exams.push(exam_name);
-  }
+  };
+
   // mobile control
+  $scope.slideRightActivity = function(activity_id) {
+    if (document.getElementById(activity_id).className === "slide-left") {
+      document.getElementById(activity_id).className = ""
+    } else {
+      document.getElementById(activity_id).className = "slide-right";
+    }
+  };
+
+  $scope.SlideLeftActivity = function(activity_id) {
+    if (document.getElementById(activity_id).className === "slide-right") {
+      document.getElementById(activity_id).className = ""
+    } else {
+      document.getElementById(activity_id).className = "slide-left";
+    }
+  };
+
   $scope.removeActivityMobile = function(activity_name) {
     var index = $scope.activities.indexOf(activity_name);
-    if ( $scope.activities[index].name === activity_name) {
-        $scope.activity_li_class = ''
-    }
+
     if (confirm('Would you like to remove this activity?')) {
       $scope.activities.splice(index, 1);
       $scope.assignments = [];
@@ -157,6 +169,6 @@ app.controller('activitiesController', [ '$scope', 'Activity', function($scope, 
       $scope.exams = [];
       $scope.selectedActivityIndex = -1;
     }
-    };
+  };
 
 }]);
