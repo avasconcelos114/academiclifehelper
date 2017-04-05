@@ -1,3 +1,11 @@
+/*
+**
+** Student graphic by <a href="http://www.flaticon.com/authors/vectorgraphit">Vectorgraphit</a> from
+** <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>.
+** Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a>
+**
+*/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto');
 html, body {
   font-family: 'Source Sans Pro', Roboto !important;
 }
@@ -8,6 +16,42 @@ html, body {
 }
 .activity-icon-selected {
   background: url("../img/mobile-activity-selected.png") no-repeat 50% 50%;
+}
+.activity-header {
+  font-size: 50px;
+  display: block;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 150px;
+  background: #eee url("../img/Logo-light.png") no-repeat 10% 54%;
+  background-size: 90px 90px;
+  border-bottom: 1px solid #696969;
+  vertical-align: middle;
+  text-align: center;
+}
+.activity-header .userName {
+  display: inline-block;
+  position: relative;
+  top: 15px;
+  color: #969696;
+  font-size: 40px;
+  font-family: 'Roboto', sans-serif;
+  max-width: 590px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+}
+.activity-header .activityName {
+  display: inline-block;
+  font-size: 50px;
+  position: relative;
+  top: 10px;
+  font-family: 'Roboto', 'Open Sans', 'Source Sans Pro', sans-serif;
+  max-width: 590px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
 }
 .activity-input {
   border: none;
@@ -25,7 +69,7 @@ html, body {
   position: fixed;
 }
 .assignment-completed {
-  background-color: green !important;
+  background-color: #7ac21a !important;
   color: #fff;
 }
 .bottom-selector {
@@ -61,7 +105,7 @@ html, body {
   z-index: 1;
   height: 97px;
   width: 300px;
-  background-color: green;
+  background-color: #7ac21a;
   color: #fff;
   bottom: 100px;
   text-align: center;
@@ -73,7 +117,7 @@ html, body {
   z-index: 1;
   height: 97px;
   width: 300px;
-  background-color: red;
+  background-color: #f33737;
   color: #fff;
   text-align: center;
 }
@@ -82,10 +126,12 @@ html, body {
 }
 .list-area {
   width: 100%;
-  height:    -moz-calc(100% - 230px);
-  height: -webkit-calc(100% - 230px);
-  height:      -o-calc(100% - 230px);
-  height:         calc(100% - 230px);
+  position: relative;
+  top: 150px;
+  height:    -moz-calc(100% - 365px);
+  height: -webkit-calc(100% - 365px);
+  height:      -o-calc(100% - 365px);
+  height:         calc(100% - 365px);
   padding: 0px;
   overflow-x: hidden;
 }

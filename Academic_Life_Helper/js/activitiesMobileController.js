@@ -46,10 +46,10 @@ app.controller('activitiesMobileController', [ '$scope', 'Activity', 'activitySe
 
     if (confirm("Would you like to remove this activity?")) {
       $scope.activities.splice(index, 1);
-      $scope.assignments = [];
-      $scope.meetings = [];
-      $scope.exams = [];
-      $scope.selected_activity_index = -1;
+      // $scope.assignments = [];
+      // $scope.meetings = [];
+      // $scope.exams = [];
+      // $scope.selected_activity_index = -1;
     }
   };
 
@@ -102,6 +102,7 @@ app.controller('activitiesMobileController', [ '$scope', 'Activity', 'activitySe
   };
 
   $scope.SlideLeftActivity = function(activity_id) {
+    console.log('activity_id: ' + activity_id)
     if (document.getElementById(activity_id).className === "slide-right") {
       document.getElementById(activity_id).className = ""
     } else {

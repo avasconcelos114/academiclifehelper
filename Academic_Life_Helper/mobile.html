@@ -34,6 +34,10 @@
 
   </head>
   <body ng-controller="activitiesMobileController">
+    <div class="activity-header">
+      <span class="userName">Andre Vasconcelos</span><br/>
+      <span class="activityName" ng-show="is_show_task">{{ activities[selected_activity_index].name }}</span>
+    </div>
 
     <div ng-show="is_show_activity" layout="row">
       <div flex="100">
@@ -47,10 +51,9 @@
               Delete
             </div>
             <span
-            id="activity_item_{{$index}}"
+            id="activity_item_{{activity.name}}"
             ng-click="selectActivityMobile(activity)"
-            md-swipe-right="slideRightActivity('activity_item_{{$index}}')"
-            md-swipe-left="SlideLeftActivity('activity_item_{{$index}}')"
+            md-swipe-right="slideRightActivity('activity_item_{{activity.name}}')"
             >
               {{ activity.name }}
             </span>
@@ -73,14 +76,14 @@
               Delete
             </div>
             <span
-            id="assignment_item_{{$index}}"
-            md-swipe-right="slideRightActivity('assignment_item_{{$index}}')"
-            md-swipe-left="SlideLeftActivity('assignment_item_{{$index}}')"
+            id="{{'assignment_item_'+ assignment.name}}"
+            md-swipe-right="slideRightActivity('{{'assignment_item_' + assignment.name}}')"
+            md-swipe-left="SlideLeftActivity('{{'assignment_item_' + assignment.name}}')"
             ng-class="assignment.status === 'COMPLETED' ? 'assignment-completed' : '' "
             >
               {{ assignment.name }}
             </span>
-            <div ng-click="completeAssignment(assignment, 'assignment_item_' + $index)" class="complete-icon-area">
+            <div ng-click="completeAssignment(assignment, 'assignment_item_' + assignment.name)" class="complete-icon-area">
               Complete
             </div>
           </li>
