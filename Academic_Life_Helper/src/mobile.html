@@ -1,0 +1,113 @@
+<html ng-app="app" ng-controller="indexController">
+  <head>
+    <title>Academic Life Helper</title>
+    <meta charset="utf-8" />
+    <base href='/Academic_Life_Helper/Academic_Life_Helper/'/>
+    <!-- Web fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" ng-href="css/mobile.css">
+    <link rel="stylesheet" ng-href="css/fixed-style.css">
+    <link rel="stylesheet" ng-href="css/bootstrap.css">
+    <!-- Imports
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    -->
+    <script src="js/angular/angular.min.js"></script>
+    <script src="js/angular/angular-animate.min.js"></script>
+    <script src="js/angular/angular-aria.min.js"></script>
+    <script src="js/angular/angular-messages.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="js/app.module.js"></script>
+
+    <!-- Services -->
+    <script src="js/indexService.js"></script>
+    <script src="js/activityService.js"></script>
+    <!-- Factories -->
+    <script src="js/personFactory.js"></script>
+    <script src="js/activityFactory.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/greetingController.js"></script>
+    <script src="js/todoListController.js"></script>
+    <script src="js/indexController.js"></script>
+    <script src="js/activitiesMobileController.js"></script>
+
+  </head>
+  <body ng-controller="activitiesMobileController">
+    <div class="activity-header">
+      <span class="userName">{{ userName.name }}</span><br/>
+      <span class="activityName" ng-show="is_show_task">{{ activities[selected_activity_index].name }}</span>
+    </div>
+
+    <div ng-show="is_show_activity" layout="row">
+      <div flex="100">
+        <ul class="list-area">
+          <li
+            style="cursor: pointer"
+            class="list-item"
+            ng-repeat="activity in activities"
+          >
+            <div ng-click="removeActivity(activity)" class="delete-area">
+              Delete
+            </div>
+            <span
+            id="activity_item_{{activity.name}}"
+            ng-click="selectActivityMobile(activity)"
+            md-swipe-right="slideRightActivity('activity_item_{{activity.name}}')"
+            md-swipe-left="SlideLeftActivity('activity_item_{{activity.name}}')"
+            >
+              {{ activity.name }}
+            </span>
+          </li>
+        </ul>
+        <p class="repeat-alarm" ng-show="showRepeatAlarm">Name has to be unique!</p>
+
+      </div>
+    </div>
+
+    <div ng-show="is_show_task" layout="row">
+      <div flex="100">
+        <ul class="list-area">
+          <li
+            style="cursor: pointer"
+            class="list-item"
+            ng-repeat="assignment in assignments"
+          >
+            <div ng-click="removeAssignment(assignment)" class="delete-area">
+              Delete
+            </div>
+            <span
+            id="{{'assignment_item_'+ assignment.name}}"
+            md-swipe-right="slideRightActivity('{{'assignment_item_' + assignment.name}}')"
+            md-swipe-left="SlideLeftActivity('{{'assignment_item_' + assignment.name}}')"
+            ng-class="assignment.status === 'COMPLETED' ? 'assignment-completed' : '' "
+            >
+              {{ assignment.name }}
+            </span>
+            <div ng-click="completeAssignment(assignment, 'assignment_item_' + assignment.name)" class="complete-icon-area">
+              Complete
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="selector-container">
+      <div style="display: table-row; height: 100px; width: 100%">
+        <input ng-show="is_show_activity" class="activity-input" placeholder="Type your activities here!" type="text" ng-model="activity_input" ng-enter="addActivity()" ng-blur="addActivity()" />
+        <input ng-show="is_show_task" class="activity-input" placeholder="Type your assignments here!" type="text" ng-model="assignment_input" ng-enter="addAssignment()" ng-blur="addAssignment()" />
+      </div>
+      <div style="display: table-row; height: 100px; width: 100%">
+        <div ng-click="toggleSelectActivity()" ng-class="activity_selector_class"></div>
+        <div ng-click="toggleSelectTask()" ng-class="task_selector_class"></div>
+      </div>
+    </div>
+
+    </div>
+  </body>
+</html>
