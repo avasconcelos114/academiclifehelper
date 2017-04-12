@@ -35,7 +35,7 @@
     //<![CDATA[
 
     if (screen.width <= 699 || navigator.userAgent.match("iPad")) {
-      document.location = "mobile.html";
+      document.location = "/src/mobile.html";
     }
 
     //]]>
@@ -43,10 +43,10 @@
 
   </head>
   <body ng-controller="greetingController" >
-    <div ng-controller="activitiesController" class="container-fluid">
+    <div ng-controller="activitiesController" style="overflow: hidden" class="container-fluid">
       <div class="max-height" layout="row">
           <div hide-sm flex="25" class="max-height" >
-            <div class="body-container">
+            <div class="body-container left-panel">
               <div ng-class="selectedSheet === 'index-dark' ? 'style-selector color-type1 selected-style' : 'style-selector color-type1'" ng-click="changeCss('index-dark')"></div>
               <div ng-class="selectedSheet === 'index-coffee' ? 'style-selector color-type2 selected-style' : 'style-selector color-type2'" ng-click="changeCss('index-coffee')"></div>
               <div ng-class="selectedSheet === 'index-light' ? 'style-selector color-type3 selected-style' : 'style-selector color-type3'" ng-click="changeCss('index-light')"></div>
@@ -57,17 +57,19 @@
                 <button class='add-user-btn' ng-click="addUser()" >Add Name</button>
               </div>
 
-              <h2 class="greeting-msg">Welcome <span class="greeting-span">{{ userName.name }}</span>!</h2>
+              <h2 class="greeting-msg"><span class="greeting-span">{{ userName.name }}</span></h2>
 
               <div >
-                <ul style="max-height: 285px; overflow-y: auto; padding-left: 0px; overflow-x: hidden">
-                  <li style="cursor: pointer" ng-class="activities[selected_activity_index].name === activity.name ? 'list-item selected-item' : 'list-item'" ng-click="selectActivity(activity)" ng-repeat="activity in activities">{{ activity.name }}
-                    <div ng-click="removeActivity(activity)" class="delete-activity"></div>
-                  </li>
-                  <li class="list-item">
-                    <input class="activity-input" ng-change="printValue()" placeholder="Type your activities here!" type="text" ng-model="activity_input" ng-enter="addActivity()" ng-blur="addActivity()" />
+                <ul class="activity-list-area">
+                  <li style="cursor: pointer" ng-class="selected_activity_id === activity._id ? 'activity-list-item selected-item' : 'activity-list-item'" ng-click="selectActivity(activity._id)" ng-repeat="activity in activities">
+                    <div ng-class="selected_activity_id === activity._id ? 'activity-list-icon-selected' : 'activity-list-icon'"></div>
+                    <span>{{ activity.title }}</span>
+                    <div ng-click="removeActivity(activity._id)" class="delete-activity"></div>
                   </li>
                 </ul>
+                <div class="list-item">
+                  <input class="activity-input" ng-change="printValue()" placeholder="Type your activities here!" type="text" ng-model="activity_input" ng-enter="addActivity()" ng-blur="addActivity()" />
+                </div>
                 <p class="repeat-alarm" ng-show="showRepeatAlarm">Name has to be unique!</p>
               </div>
 
@@ -76,98 +78,46 @@
 
           <div flex="75" flex-sm="100" class="max-height">
             <div  style="overflow: hidden;" class="body-container" >
-              <h1 class="activity-header" ng-show="selected_activity_index != -1">{{ activities[selected_activity_index].name }}</h1>
-              <h2 class="activity-header" ng-show="selected_activity_index != -1">To-dos</h2>
-              <div layout="row">
-                <div class="flex-padding half-height" flex="33">
-                  <div ng-show="selected_activity_index != -1">
-                    <h2 class="section-header">Assignments</h2>
-                    <p class="task-counter">You currently have {{ assignments.length }} assignments remaining.</p>
-                    <ul style="max-height: 285px; overflow-y: auto; padding-left: 0px; overflow-x: hidden">
-                      <li class="list-item" ng-repeat="assignment in assignments">
-                        - {{ assignment }}
-                        <div ng-click="removeAssignment(assignment)" class="delete-activity"></div>
-                        <div ng-click="completeAssignment(assignment)" class="complete-activity"></div>
-                      </li>
-                      <li class="list-item">
-                        <input class="task-input" placeholder="Type your assignments here!" type="text" ng-model="assignment_input" ng-enter="addAssignment()" ng-blur="addAssignment()" />
-                      </li>
-                    </ul>
-                    <p class="repeat-alarm" ng-show="show_repeat_alarm_assignment">Name has to be unique!</p>
-                  </div>
-                </div>
-
-                <div class="flex-padding half-height" flex="33">
-                  <div ng-show="selected_activity_index != -1">
-                    <h2 class="section-header">Meetings</h2>
-                    <p class="task-counter">You currently have {{ meetings.length }} meetings remaining.</p>
-                    <ul style="max-height: 285px; overflow-y: auto; padding-left: 0px; overflow-x: hidden">
-                      <li class="list-item" ng-repeat="meeting in meetings">
-                        - {{ meeting }}
-                        <div ng-click="removeMeeting(meeting)" class="delete-activity"></div>
-                        <div ng-click="completeMeeting(meeting)" class="complete-activity"></div>
-                      </li>
-                      <li class="list-item">
-                        <input class="task-input" placeholder="Type your meetings here!" type="text" ng-model="meeting_input" ng-enter="addMeeting()" ng-blur="addMeeting()" />
-                      </li>
-                    </ul>
-                    <p class="repeat-alarm" ng-show="show_repeat_alarm_meeting">Name has to be unique!</p>
-                  </div>
-                </div>
-
-                <div class="flex-padding half-height" flex="33">
-                  <div ng-show="selected_activity_index != -1">
-                    <h2 class="section-header">Exams</h2>
-                    <p class="task-counter">You currently have {{ exams.length }} exams remaining.</p>
-                    <ul style="max-height: 285px; overflow-y: auto; padding-left: 0px; overflow-x: hidden">
-                      <li class="list-item" ng-repeat="exam in exams">
-                        - {{ exam }}
-                        <div ng-click="removeExam(exam)" class="delete-activity"></div>
-                        <div ng-click="completeExam(exam)" class="complete-activity"></div>
-                      </li>
-                      <li class="list-item">
-                        <input class="task-input" placeholder="Type your exams/quizzes here!" type="text" ng-model="exam_input" ng-enter="addExam()" ng-blur="addExam()" />
-                      </li>
-                    </ul>
-                    <p class="repeat-alarm" ng-show="show_repeat_alarm_exam">Name has to be unique!</p>
-                  </div>
-                </div>
+              <div class="header-area">
+                <h1 class="activity-header" ng-show="selected_activity_id != -1">{{ activities[findIndexById('activity', selected_activity_id)].title }}</h1></br>
+                <h2 class="activity-header" ng-show="selected_activity_id != -1">To-dos</h2>
               </div>
-              <h2 class="activity-header" ng-show="selected_activity_index != -1">Completed</h2>
+              <div ng-show="selected_activity_id != -1" class="search-area">
+                <input class="search_input" ng-enter="searchAssignment()" placeholder="Search..." ng-model="search_input" type="text" />
+                <md-button ng-click="searchAssignment()">Search</md-button>
+              </div>
               <div layout="row">
-                <div class="flex-padding half-height" flex="33">
-                  <div ng-show="selected_activity_index != -1">
-                    <h2 class="section-header">Assignments</h2>
-                    <p class="task-counter">You currently have {{ completed_assignments.length }} assignments completed.</p>
-                    <ul style="max-height: 285px; overflow-y: auto; padding-left: 0px; overflow-x: hidden">
-                      <li class="list-item" ng-repeat="assignment in completed_assignments">
-                        - {{ assignment }}
+                <div class="flex-padding max-height" flex="100">
+                  <div ng-show="selected_activity_id != -1">
+                    <ul class="list-area">
+                      <li ng-class="assignment.completedYn === 'Y' ? 'list-item completed' : 'list-item'" ng-repeat="assignment in assignments">
+                        <span style="max-width: calc(100% - 230px);; overflow: hidden; text-overflow: ellipsis; display: inline-block; white-space: nowrap">{{ assignment.title }}</span>
+                        <div ng-click="removeAssignment(assignment._id)" class="delete-activity"></div>
+                        <div ng-click="setCompletedYn(assignment._id, assignment.completedYn)" ng-class="assignment.completedYn === 'Y' ? 'complete-activity-checked' : 'complete-activity'"></div>
+                        <div class="datepicker-area">
+                          <md-datepicker
+                            ng-change="setAssignmentDueDate(assignment._id, $index)"
+                            ng-model="assignment_due_dates[findDateById('assignment', assignment._id)].date"
+                            md-placeholder="Enter date"
+                            md-open-on-focus
+                          >
+                          </md-datepicker>
+                        </div>
                       </li>
-                    </ul>
-                  </div>
-                </div>
 
-                <div class="flex-padding half-height" flex="33">
-                  <div ng-show="selected_activity_index != -1">
-                    <h2 class="section-header">Meetings</h2>
-                    <p class="task-counter">You currently have {{ completed_meetings.length }} meetings completed.</p>
-                    <ul style="max-height: 285px; overflow-y: auto; padding-left: 0px; overflow-x: hidden">
-                      <li class="list-item" ng-repeat="meeting in completed_meetings">
-                        - {{ meeting }}
-                      </li>
                     </ul>
-                  </div>
-                </div>
-
-                <div class="flex-padding half-height" flex="33">
-                  <div ng-show="selected_activity_index != -1">
-                    <h2 class="section-header">Exams</h2>
-                    <p class="task-counter">You currently have {{ completed_exams.length }} exams completed.</p>
-                    <ul style="max-height: 285px; overflow-y: auto; padding-left: 0px; overflow-x: hidden">
-                      <li class="list-item" ng-repeat="exam in completed_exams">
-                        - {{ exam }}
-                      </li>
-                    </ul>
+                    <div ng-form name="assignmentInput" class="list-item">
+                      <input
+                        class="task-input"
+                        placeholder="Type your assignments here!"
+                        type="text"
+                        ng-maxlength="80"
+                        ng-model="assignment_input"
+                        ng-enter="assignmentInput.$valid ? addAssignment() : null"
+                        ng-blur="assignmentInput.$valid ? addAssignment() : null"
+                      />
+                    </div>
+                    <p class="repeat-alarm" ng-show="!assignmentInput.$valid">Input content too long!</p>
                   </div>
                 </div>
               </div>
