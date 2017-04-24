@@ -5,7 +5,8 @@ html, body {
   max-height: calc(100% - 140px);
   overflow-y: auto;
   padding-left: 0px;
-  overflow-x: hidden
+  overflow-x: hidden;
+  padding-bottom: 10px;
 }
 .max-height {
   height: 100%;
@@ -60,6 +61,10 @@ html, body {
 }
 .header-area {
   display: inline-block;
+  width:         calc(100% - 400px);
+  width:    -moz-calc(100% - 400px);
+  width: -webkit-calc(100% - 400px);
+  width:      -o-calc(100% - 400px);
 }
 .list-area {
   max-height:    -moz-calc(100% - 110px);
@@ -81,13 +86,21 @@ html, body {
 .search-area {
   display: inline-block;
   float: right;
-  margin: 20px 10px 0px 0px;
+  margin: 5px 10px 0px 0px;
+}
+.style-selector-area {
+  position: relative;
+  left: 5px;
+  bottom: 5px;
+  padding: 0;
+  z-index: 10;
 }
 .style-selector {
   display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
+  padding: 0;
   cursor: pointer;
 }
 .style-selector:hover{
@@ -107,7 +120,12 @@ html, body {
   border-color: blue;
   box-shadow: 0 0 10px blue;
 }
-
+.type-area {
+  display : inline-block;
+  height: 20px;
+  width: 160px;
+  float: right;
+}
 /*
    External CSS overrides
 */
@@ -126,4 +144,10 @@ html, body {
 .md-datepicker-input-container {
   /*float: right;*/
   border-bottom: none !important;
+}
+md-sidenav {
+  width: 350px !important;
+}
+md-select {
+  margin: 0px 20px 0px 0px !important;
 }

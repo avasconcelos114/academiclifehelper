@@ -1,0 +1,48 @@
+<html ng-app="app" ng-controller="indexController">
+  <head>
+    <title>Academic Life Helper</title>
+    <meta charset="utf-8" />
+    <!-- Web fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <!-- Styles -->
+    <link rel="stylesheet" ng-href="../bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" ng-href="src/css/index-light.css">
+    <link rel="stylesheet" ng-href="src/css/fixed-style.css">
+    <link rel="stylesheet" ng-href="src/css/bootstrap.css">
+    <!-- Angular Imports -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.js"></script>
+    <script src="../bower_components/angular-material/angular-material.js"></script>
+    <script src="src/js/app.module.js"></script>
+    <!-- Controllers -->
+    <script src="src/js/indexController.js"></script>
+    <script src="src/js/activitiesController.js"></script>
+    <script src="src/js/assignmentsController.js"></script>
+
+    <script type="text/javascript">
+    //<![CDATA[
+
+    // if (screen.width <= 699 || navigator.userAgent.match("iPad")) {
+    //   document.location = "/src/mobile.html";
+    // }
+
+    //]]>
+    </script>
+
+  </head>
+  <body >
+    <input type="text" ng-model="username_input"/>
+    <input type="password" ng-model="password_input" />
+    <button type="button" ng-click="registerUser()">Sign Up</button>
+
+    <hr />
+
+    <input type="text" ng-model="login_username_input"/>
+    <input type="password" ng-model="login_password_input" />
+    <button type="button" ng-click="loginUser()">Sign In</button>
+
+  </body>
+</html>

@@ -1,13 +1,15 @@
 // server.js
 
     // set up ========================
-    var express        = require('express');
-    var app            = express();
-    var mongoose       = require('mongoose');
-    var morgan         = require('morgan');
-    var bodyParser     = require('body-parser');
-    var methodOverride = require('method-override');
-    var autoIncrement  = require('mongoose-auto-increment');
+    var express          = require('express');
+    var app              = express();
+    var mongoose         = require('mongoose');
+    var morgan           = require('morgan');
+    var bodyParser       = require('body-parser');
+    var methodOverride   = require('method-override');
+    var autoIncrement    = require('mongoose-auto-increment');
+    var bcrypt           = require('bcrypt'),
+    SALT_WORK_FACTOR = 10;
     // configuration =================
     var MongoDB = 'mongodb://magistrall:avasconcelos114@127.0.0.1:27017/admin';
     mongoose.Promise = global.Promise;
@@ -49,6 +51,37 @@
     var Assignment = mongoose.model('Assignment', assignmentSchema);
 
 
+    var UserSchema = new Schema({
+      username     : { type: String, required: true, index: { unique: true } },
+      creationDate : Date,
+      password     : String,
+    }, { collection : 'users'});
+
+    UserSchema.pre('validate', function(next){
+      var user = this;
+
+      if (!user.isModified('password')) return next();
+
+      bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
+        if(err) return next(err);
+        bcrypt.hash(user.password, salt, function(err, hash){
+            if(err) return next(err);
+
+            user.password = hash;
+            next();
+          });
+        });
+    });
+
+    UserSchema.methods.comparePassword = function(candidatePassword, cb) {
+      bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+        if (err) return cb(err);
+        cb(null, isMatch);
+      });
+    };
+
+    UserSchema.plugin(autoIncrement.plugin, 'User');
+    var User = mongoose.model('User', UserSchema);
     // listen (start app with node server.js) ======================================
     app.listen(1337);
 
@@ -114,11 +147,11 @@
       });
     });
 
-    app.get('/api/assignments/search/:title', function(req, res) {
-      console.log(req.params.title)
-      var value = new RegExp(req.params.title,'i');
+    app.get('/api/:activity_id/assignments/search/:title', function(req, res) {
+      var title = new RegExp(req.params.title,'i');
       Assignment.find({
-        title :  { $regex: value }
+        title      :  { $regex: title },
+        activityId : { $eq : req.params.activity_id }
       }).exec(function(err, assignments) {
         if(err) { res.send(err); }
         console.log(assignments)
@@ -192,8 +225,46 @@
       });
     });
 
+    // Users api ---------------------------------------------------------------------
+
+
+
+    // save user to database
+    // var testAdd = new User({
+    //   username : 'testuser',
+    //   password : 'testing123',
+    //   creationDate : new Date()
+    // })
+    //
+    // testAdd.save(function(err, data){
+    //   if(err) console.log(err);
+    //   else console.log(data);
+    // });
+
+    app.post('/api/user', function(req, res) {
+      var user = new User({
+        username: req.body.username,
+        password: req.body.password,
+        creationDate: new Date()
+      })
+
+      user.save(function(err){
+        if(err) res.send(err);
+      });
+    });
+
+    app.get('/api/login', function(req, res){
+      User.findOne({
+        username : req.body.username
+      }, function(err, data){
+        if(err) res.send(err);
+        console.log(data)
+        // res.send({ redirect : '/src/index.html', status: 'SUCCESS' })
+      })
+    });
 
     // // route to handle all angular requests
     app.get('/', function(req, res) {
-        res.sendfile('./src/index.html');
+        // res.sendfile('./src/register.html');
+        res.sendFile('./src/register.html', {root: __dirname});
     });

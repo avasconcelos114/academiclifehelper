@@ -215,9 +215,9 @@ html, body {
   width: 100%;
   display: table;
 }
-.task-icon {
+.assignment-icon {
   background: url("../img/mobile-task-light.png") no-repeat 50% 50%;
 }
-.task-icon-selected {
+.assignment-icon-selected {
   background: url("../img/mobile-task-selected.png") no-repeat 50% 50%;
 }
