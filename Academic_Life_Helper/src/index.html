@@ -7,20 +7,21 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <!-- Styles -->
     <link rel="stylesheet" ng-href="../bower_components/angular-material/angular-material.css">
-    <link rel="stylesheet" ng-href="css/{{ selectedSheet }}.css">
-    <link rel="stylesheet" ng-href="css/fixed-style.css">
-    <link rel="stylesheet" ng-href="css/bootstrap.css">
+    <link rel="stylesheet" ng-href="src/css/{{ selectedSheet }}.css">
+    <link rel="stylesheet" ng-href="src/css/fixed-style.css">
+    <link rel="stylesheet" ng-href="src/css/bootstrap.css">
     <!-- Angular Imports -->
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-animate/angular-animate.js"></script>
     <script src="../bower_components/angular-aria/angular-aria.js"></script>
     <script src="../bower_components/angular-messages/angular-messages.js"></script>
     <script src="../bower_components/angular-material/angular-material.js"></script>
-    <script src="js/app.module.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="src/js/app.module.js"></script>
     <!-- Controllers -->
-    <script src="js/indexController.js"></script>
-    <script src="js/activitiesController.js"></script>
-    <script src="js/assignmentsController.js"></script>
+    <script src="src/js/indexController.js"></script>
+    <script src="src/js/activitiesController.js"></script>
+    <script src="src/js/assignmentsController.js"></script>
 
     <script type="text/javascript">
     //<![CDATA[
@@ -44,7 +45,8 @@
         md-whiteframe="4">
 
           <md-toolbar class="md-theme-indigo">
-            <h2 class="greeting-msg"><span class="greeting-span">Andre Vasconcelos</span></h2>
+            <button ng-click="logoutUser()">Logout</button>
+            <h2 class="greeting-msg"><span class="greeting-span">{{ logged_username }}</span></h2>
             <div class="style-selector-area">
               <div ng-class="selectedSheet === 'index-dark' ? 'style-selector color-type1 selected-style' : 'style-selector color-type1'" ng-click="changeCss('index-dark')"></div>
               <div ng-class="selectedSheet === 'index-coffee' ? 'style-selector color-type2 selected-style' : 'style-selector color-type2'" ng-click="changeCss('index-coffee')"></div>
@@ -82,7 +84,7 @@
           <div ng-controller="assignmentsController" flex-sm="100" flex-xs="100" class="max-height right-panel">
             <div  style="overflow: hidden;" class="body-container" >
               <md-button style="position: fixed; right: 5px; top: 5px;" hide-gt-sm ng-click="toggleLeft()" class="md-fab" aria-label="Comment">
-                <img width="35px" src="img/ic_reorder_white_24dp_2x.png" />
+                <img width="35px" src="src/img/ic_reorder_white_24dp_2x.png" />
               </md-button>
               <div class="header-area">
                 <h1 class="activity-header" ng-show="selected_activity_id != -1">{{ activities[findIndexById('activity', selected_activity_id)].title }}</h1></br>

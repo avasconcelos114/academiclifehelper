@@ -32,7 +32,7 @@
 
     var activitySchema = new Schema({
       title : String,
-      index : Number
+      userId: Number,
     }, { collection : 'activities'});
 
     activitySchema.plugin(autoIncrement.plugin, 'Activity');
@@ -91,17 +91,20 @@
 
     // Activity api ---------------------------------------------------------------------
 
-    app.get('/api/activities', function(req, res) {
-        Activity.find(function(err, activities) {
-            if (err)
-                res.send(err)
-            res.json(activities);
+    app.get('/api/:logged_user_id/activities', function(req, res) {
+        Activity.find({
+          userId : { $eq : req.params.logged_user_id},
+        }).exec(function (err, activities) {
+          res.json(activities)
         });
     });
 
-    app.post('/api/activity', function(req, res) {
-      console.log('Adding activity: ' + JSON.stringify(req.body.title));
-        var activity = new Activity(req.body);
+    app.post('/api/:logged_user_id/activity', function(req, res) {
+        var requestBody = {
+          userId : req.params.logged_user_id,
+          title  : req.body.title
+        }
+        var activity = new Activity(requestBody);
         activity.save(function (err) {
           if (err) {
               console.log(err)
@@ -187,7 +190,6 @@
     });
 
     app.post('/api/:activity_id/assignment', function(req, res) {
-      console.log('Adding Assignment: ' + JSON.stringify(req.body.title));
         var requestBody = {
           activityId  : req.params.activity_id,
           title       : req.body.title,
@@ -227,19 +229,17 @@
 
     // Users api ---------------------------------------------------------------------
 
+    app.post('/api/userVerify', function(req, res) {
+      // check if username exists
+      User.findOne({
+        username : { $eq : req.body.username }
+      }, function(err, user_info){
+        if(err) res.send(err);
 
-
-    // save user to database
-    // var testAdd = new User({
-    //   username : 'testuser',
-    //   password : 'testing123',
-    //   creationDate : new Date()
-    // })
-    //
-    // testAdd.save(function(err, data){
-    //   if(err) console.log(err);
-    //   else console.log(data);
-    // });
+        if(user_info !== null) res.json({ status : 'EXISTING_USERNAME' })
+        else res.json({ status : 'SUCCESS' })
+      })
+    });
 
     app.post('/api/user', function(req, res) {
       var user = new User({
@@ -248,23 +248,39 @@
         creationDate: new Date()
       })
 
-      user.save(function(err){
+      user.save(function(err, user){
         if(err) res.send(err);
+
+        res.json(user)
       });
     });
 
-    app.get('/api/login', function(req, res){
+    app.post('/api/login', function(req, res){
       User.findOne({
-        username : req.body.username
-      }, function(err, data){
+        username : { $eq : req.body.username }
+      }, function(err, user_info){
         if(err) res.send(err);
-        console.log(data)
-        // res.send({ redirect : '/src/index.html', status: 'SUCCESS' })
+        var password_input = req.body.password;
+        console.log(user_info)
+        bcrypt.hash(password_input, function(err, hash){
+          password_input = hash;
+        });
+
+        bcrypt.compare(password_input, user_info.password, function(err, resp) {
+          if(resp)
+            res.json({ redirect : '/classes', status: 'SUCCESS', user_info })
+        });
+
+
+        // res.send({ redirect : '/classes', status: 'SUCCESS' })
       })
     });
 
     // // route to handle all angular requests
     app.get('/', function(req, res) {
-        // res.sendfile('./src/register.html');
         res.sendFile('./src/register.html', {root: __dirname});
+    });
+
+    app.get('/classes', function(req, res) {
+        res.sendFile('./src/index.html', {root: __dirname});
     });

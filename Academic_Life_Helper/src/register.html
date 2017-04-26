@@ -16,11 +16,10 @@
     <script src="../bower_components/angular-aria/angular-aria.js"></script>
     <script src="../bower_components/angular-messages/angular-messages.js"></script>
     <script src="../bower_components/angular-material/angular-material.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="src/js/app.module.js"></script>
     <!-- Controllers -->
     <script src="src/js/indexController.js"></script>
-    <script src="src/js/activitiesController.js"></script>
-    <script src="src/js/assignmentsController.js"></script>
 
     <script type="text/javascript">
     //<![CDATA[
@@ -34,15 +33,89 @@
 
   </head>
   <body >
-    <input type="text" ng-model="username_input"/>
-    <input type="password" ng-model="password_input" />
-    <button type="button" ng-click="registerUser()">Sign Up</button>
 
-    <hr />
+    <div class="login_panel">
+      <md-content class="md-padding max-height">
+      <md-tabs class="md-accent max-height" md-selected="selected_tab" md-align-tabs="top">
+        <md-tab id="tab1">
+          <md-tab-label>Login</md-tab-label>
+          <md-tab-body >
+            <form style="margin-top: 20px" name="loginForm" ng-submit="loginUser()">
+              <div layout="row">
+                <md-input-container flex="100">
+                  <label>Username</label>
+                  <input no-special-char no-space-validation required name="username" minlength="4" maxlength="15" ng-model="login_username_input">
+                  <div ng-messages="loginForm.username.$error">
+                    <div ng-message="required">This is a required field.</div>
+                    <div ng-message-exp="['minlength', 'maxlength']">Please input a username between 4 and 15 characters long.</div>
+                  </div>
+                </md-input-container>
+              </div>
 
-    <input type="text" ng-model="login_username_input"/>
-    <input type="password" ng-model="login_password_input" />
-    <button type="button" ng-click="loginUser()">Sign In</button>
+              <div layout="row">
+                <md-input-container flex="100">
+                  <label>Password</label>
+                  <input required no-space-validation name="password" type="password" minlength="4" maxlength="12" ng-model="login_password_input">
+                  <div ng-messages="loginForm.password.$error">
+                    <div ng-message="required">This is a required field.</div>
+                    <div ng-message-exp="['minlength', 'maxlength']">Please input a password between 4 and 12 characters long.</div>
+                  </div>
+                </md-input-container>
+              </div>
+
+              <div style="position: relative; top: 160px">
+                <md-button class="register-button" type="submit">Sign In</md-button>
+              </div>
+
+            </form>
+          </md-tab-body>
+        </md-tab>
+        <md-tab id="tab2">
+          <md-tab-label>Register</md-tab-label>
+          <md-tab-body>
+            <form style="margin-top: 20px" name="registrationForm" ng-submit="registerUser()">
+
+              <div layout="row">
+                <md-input-container flex="100">
+                  <label>Username</label>
+                  <input no-special-char no-space-validation required name="username" minlength="4" maxlength="15" ng-model="username_input">
+                  <div ng-messages="registrationForm.username.$error">
+                    <div ng-message="required">This is a required field.</div>
+                    <div ng-message-exp="['minlength', 'maxlength']">Please input a username between 4 and 15 characters long.</div>
+                  </div>
+                </md-input-container>
+              </div>
+
+              <div layout="row">
+                <md-input-container flex="100">
+                  <label>Password</label>
+                  <input required no-space-validation name="password" type="password" minlength="4" maxlength="12" ng-model="password_input">
+                  <div ng-messages="registrationForm.password.$error">
+                    <div ng-message="required">This is a required field.</div>
+                    <div ng-message-exp="['minlength', 'maxlength']">Please input a password between 4 and 12 characters long.</div>
+                  </div>
+                </md-input-container>
+              </div>
+
+              <div layout="row">
+                <md-input-container flex="100">
+                  <label>Confirm Password</label>
+                  <input required no-space-validation name="password_confirm" type="password" minlength="4" maxlength="12" ng-model="password_input_confirm">
+                  <div ng-messages="registrationForm.password_confirm.$error">
+                    <div ng-message="required">This is a required field.</div>
+                    <div ng-message-exp="['minlength', 'maxlength']">Please input a password between 4 and 12 characters long.</div>
+                  </div>
+                </md-input-container>
+              </div>
+              <div style="position: relative; top: 66px">
+                <md-button class="register-button" type="submit">Sign Up</md-button>
+              </div>
+            </form>
+            </md-tab-body>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+    </div>
 
   </body>
 </html>
