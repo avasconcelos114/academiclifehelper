@@ -9,9 +9,15 @@ app.controller('activitiesController',
     $cookies
   ){
 
-  $scope.logged_user = JSON.parse($cookies.get('user'));
-  $scope.logged_user_id = $scope.logged_user._id;
-  console.log('logged_user_id : ' + $scope.logged_user_id);
+  if($cookies.get('user')) {
+    $scope.logged_user = JSON.parse($cookies.get('user'));
+
+    $scope.logged_user_id = $scope.logged_user._id;
+    console.log('logged_user_id : ' + $scope.logged_user_id);
+
+  } else {
+    window.location = '/';
+  }
   if($scope.logged_user === undefined) {
     alert('Please Log in First!');
     window.location = '/';

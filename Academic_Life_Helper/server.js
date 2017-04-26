@@ -272,8 +272,8 @@
         });
 
         bcrypt.compare(password_input, user_info.password, function(err, resp) {
-          if(resp)
-            res.json({ redirect : '/classes', status: 'SUCCESS', user_info })
+          if(resp) res.json({ redirect : '/classes', status: 'SUCCESS', user_info })
+          else res.json({ status: 'INCORRECT_PASSWORD' })
         });
 
 

@@ -4,6 +4,11 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
 
   // data from user logged in
   if($cookies.get('user')) {
+    // redirect to /classes if session already started
+    if(window.location.pathname === '/') {
+      window.location.pathname = '/classes';
+    }
+
     $scope.logged_user_info =  JSON.parse($cookies.get('user'));
     $scope.logged_username = $scope.logged_user_info.username;
   }
@@ -68,10 +73,14 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
         // Uncomment below for testing
         // console.log(success)
         if(success.data.status === 'USERNAME_NOT_FOUND') {
-          alert('Please confirm the username and password');
+          alert('Please confirm that the username is spelled correctly.');
           return;
         }
-        
+
+        if(success.data.status === 'INCORRECT_PASSWORD') {
+          alert('Please confirm that you wrote your password correctly.');
+          return;
+        }
         $cookies.putObject('user', success.data.user_info);
         window.location = success.data.redirect
 
