@@ -260,6 +260,11 @@
         username : { $eq : req.body.username }
       }, function(err, user_info){
         if(err) res.send(err);
+
+        if(user_info === null) {
+          res.json({ status : 'USERNAME_NOT_FOUND' })
+          return;
+        }
         var password_input = req.body.password;
         console.log(user_info)
         bcrypt.hash(password_input, function(err, hash){

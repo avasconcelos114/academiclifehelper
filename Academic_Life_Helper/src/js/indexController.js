@@ -67,6 +67,11 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
       .then(function (success) {
         // Uncomment below for testing
         // console.log(success)
+        if(success.data.status === 'USERNAME_NOT_FOUND') {
+          alert('Please confirm the username and password');
+          return;
+        }
+        
         $cookies.putObject('user', success.data.user_info);
         window.location = success.data.redirect
 

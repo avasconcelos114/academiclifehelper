@@ -1,0 +1,26 @@
+{
+  "name": "Academic_Life_Helper",
+  "description": "First MEAN Project",
+  "main": "server.js",
+  "authors": [
+    "Andre Vasconcelos"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-cookies": "^1.6.4",
+    "angular-animate": "^1.6.4",
+    "angular-aria": "^1.6.4",
+    "angular-messages": "^1.6.4",
+    "angular": "^1.6.4",
+    "angular-material": "^1.1.3"
+  }
+}
