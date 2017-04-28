@@ -111,6 +111,12 @@ html, body {
   float: right;
   margin: 5px 10px 0px 0px;
 }
+.settings-button {
+  height: 25px;
+  position: absolute;
+  top: 50px;
+  left: 305px;
+}
 .style-selector-area {
   position: relative;
   left: 5px;

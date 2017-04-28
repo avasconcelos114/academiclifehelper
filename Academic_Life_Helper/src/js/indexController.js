@@ -13,6 +13,13 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
     $scope.logged_username = $scope.logged_user_info.username;
   }
 
+  // Menu Controls
+  var originatorEv;
+  this.openMenu = function($mdMenu, ev) {
+    originatorEv = ev;
+    $mdMenu.open(ev);
+  };
+
   // CSS Selector
   $scope.selectedSheet = "index-light";
   $scope.changeCss = function(sheet){

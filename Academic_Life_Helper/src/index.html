@@ -2,6 +2,9 @@
   <head>
     <title>Academic Life Helper</title>
     <meta charset="utf-8" />
+    <link rel="icon"
+      type="image/png"
+      href="src/img/Logo-light.png">
     <!-- Web fonts -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -45,7 +48,23 @@
         md-whiteframe="4">
 
           <md-toolbar class="md-theme-indigo">
-            <button ng-click="logoutUser()">Logout</button>
+            <md-menu>
+              <img class="settings-button" src="src/img/settings.png" ng-click="$mdMenu.open()" />
+
+              <md-menu-content width="4">
+                <md-menu-item>
+                  <md-button class="menu-item-button" ng-click="">
+                    Account Preferences
+                  </md-button>
+                </md-menu-item>
+                <md-menu-divider></md-menu-divider>
+                <md-menu-item>
+                  <md-button ng-click="logoutUser()">
+                    Logout
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
             <h2 class="greeting-msg"><span class="greeting-span">{{ logged_username }}</span></h2>
             <div class="style-selector-area">
               <div ng-class="selectedSheet === 'index-dark' ? 'style-selector color-type1 selected-style' : 'style-selector color-type1'" ng-click="changeCss('index-dark')"></div>

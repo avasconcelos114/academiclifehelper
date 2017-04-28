@@ -103,7 +103,7 @@ body {
   height: 100%;
 }
 .completed {
-  background: #2d3c3f;
+  background: #314144;
 }
 .greeting-msg {
   color: #009eb7;
@@ -220,4 +220,10 @@ md-sidenav.md-default-theme, md-sidenav, md-sidenav.md-default-theme md-content,
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
   padding: 20px 20px 0px 20px;
   background: none !important;
+}
+md-menu-item > .md-button {
+  color: #000;
+}
+md-menu-item > .md-button:hover {
+  color: #fff;
 }
