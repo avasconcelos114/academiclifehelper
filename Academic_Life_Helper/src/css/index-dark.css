@@ -105,6 +105,10 @@ body {
 .completed {
   background: #314144;
 }
+.dialog-header {
+  padding: 0 !important;
+  background: #414b4c !important;
+}
 .greeting-msg {
   color: #009eb7;
   border-bottom: 1px solid #75767a;
@@ -165,6 +169,10 @@ body {
   font-weight: bold;
   background-color: #4e595a;
 }
+.settings-button {
+  background: url(../img/settings-dark.png) no-repeat 50% 50%;
+  background-size: 25px;
+}
 .task-input {
   border: none;
   border-radius: 0px !important;
@@ -219,11 +227,27 @@ md-sidenav.md-default-theme, md-sidenav, md-sidenav.md-default-theme md-content,
 }
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
   padding: 20px 20px 0px 20px;
-  background: none !important;
+  background: #2f3739;
 }
 md-menu-item > .md-button {
   color: #000;
 }
 md-menu-item > .md-button:hover {
+  color: #fff;
+}
+.navbar-custom {
+  background: none !important;
+}
+.md-toolbar-tools .md-button, .md-toolbar-tools .md-button.md-icon-button md-icon {
+  background: #009eb7;
+}
+.md-toolbar-tools .md-button:hover, .md-toolbar-tools .md-button.md-icon-button md-icon:hover {
+  color: #009eb7;
+}
+calendar-md .md-toolbar-tools h2 {
+  color: #fff;
+  overflow: hidden;
+}
+._md-nav-button-text {
   color: #fff;
 }

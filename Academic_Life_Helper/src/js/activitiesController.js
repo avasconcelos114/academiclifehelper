@@ -3,31 +3,21 @@ app.controller('activitiesController',
   '$scope',
   '$http',
   '$cookies',
+  '$location',
   function(
     $scope,
     $http,
-    $cookies
+    $cookies,
+    $location
   ){
-
-  if($cookies.get('user')) {
-    $scope.logged_user = JSON.parse($cookies.get('user'));
-
-    $scope.logged_user_id = $scope.logged_user._id;
-    console.log('logged_user_id : ' + $scope.logged_user_id);
-
-  } else {
-    window.location = '/';
-  }
-  if($scope.logged_user === undefined) {
-    alert('Please Log in First!');
-    window.location = '/';
-  }
 
   // initialized variables to be shown on screen
   $scope.activities = [];
 
+
   // selected array values
-  $scope.selected_activity_id = -1;
+  if($cookies.get('selected_activity_id') >= 0) $scope.selected_activity_id = parseInt($cookies.get('selected_activity_id'));
+  else $scope.selected_activity_id = -1;
 
   // Activity Controls
   $scope.getActivityList = function(){
@@ -45,10 +35,11 @@ app.controller('activitiesController',
     )
   };
 
-  $scope.getActivityList();
-
   $scope.selectActivity = function(activity_id) {
-    $scope.selected_activity_id = activity_id
+    $scope.selected_activity_id = activity_id;
+    $cookies.put('selected_activity_id', activity_id);
+    $location.path('classes');
+
   };
 
   $scope.addActivity = function(){
@@ -109,4 +100,25 @@ app.controller('activitiesController',
       }
     );
   };
+
+  // Run on pageload
+  
+  if($cookies.get('user')) {
+    $scope.logged_user = JSON.parse($cookies.get('user'));
+
+    $scope.logged_user_id = $scope.logged_user._id;
+    console.log('logged_user_id : ' + $scope.logged_user_id);
+
+  } else {
+    window.location = '/';
+  }
+  if($scope.logged_user === undefined) {
+    alert('Please Log in First!');
+    window.location = '/';
+  }
+
+  if($scope.selected_activity_id >= 0) $scope.selectActivity($scope.selected_activity_id);
+  $scope.getActivityList();
+
+
 }]);

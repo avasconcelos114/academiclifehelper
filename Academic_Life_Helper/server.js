@@ -40,10 +40,11 @@
 
     var assignmentSchema = new Schema({
       activityId  : Number,
-      index       : Number,
       title       : String,
       type        : String,
+      startDate   : Date,
       dueDate     : Date,
+      description : String,
       completedYn : String
     }, { collection : 'assignments'});
 
@@ -194,6 +195,7 @@
           activityId  : req.params.activity_id,
           title       : req.body.title,
           type        : req.body.type ? req.body.type : 'assignment',
+          startDate   : req.body.startDate ? req.body.startDate : new Date(),
           dueDate     : req.body.dueDate ? req.body.dueDate : new Date(),
           completedYn : req.body.completedYn ? req.body.completedYn : 'N'
         }
@@ -285,7 +287,15 @@
     app.get('/', function(req, res) {
         res.sendFile('./src/register.html', {root: __dirname});
     });
-
     app.get('/classes', function(req, res) {
         res.sendFile('./src/index.html', {root: __dirname});
+    });
+    app.get('/calendar', function(req, res) {
+        res.sendFile('./src/index.html', {root: __dirname});
+    });
+    app.get('/dashboard', function(req, res) {
+        res.sendFile('./src/index.html', {root: __dirname});
+    });
+    app.get('/classesMobile', function(req, res) {
+        res.sendFile('./src/mobile.html', {root: __dirname});
     });

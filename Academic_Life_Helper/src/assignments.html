@@ -1,0 +1,92 @@
+<div style="overflow: hidden;" layout="row" class="body-container" >
+  <div class="max-height" flex="100">
+    <div class="header-area">
+      <h1 class="activity-header" ng-show="selected_activity_id != -1">{{ activities[findIndexById('activity', selected_activity_id)].title }}</h1></br>
+    </div>
+
+    <div ng-show="selected_activity_id != -1" class="search-area">
+      <input class="search_input" ng-change="searchAssignment()" placeholder="Search..." ng-model="search_input" type="text" />
+      <md-button ng-click="searchAssignment()">Search</md-button>
+      <br />
+
+      <md-select style="width: 160px; display: inline-block" ng-model="selected_type" placeholder="Type Filter" class="md-no-underline">
+        <md-option value="all">All - Types</md-option>
+        <md-option value="assignment">Assignment</md-option>
+        <md-option value="meeting">Meeting</md-option>
+        <md-option value="exam">Exam</md-option>
+      </md-select>
+
+      <md-select style="width: 160px; display: inline-block" ng-model="selected_completion" placeholder="Completion Filter" class="md-no-underline">
+        <md-option value="all">All - Progress</md-option>
+        <md-option value="Y">Completed</md-option>
+        <md-option value="N">In Progress</md-option>
+      </md-select>
+    </div>
+
+    <div style="margin-top: 30px" layout="row">
+      <div class="max-height" flex="100">
+        <div ng-show="selected_activity_id != -1">
+          <ul class="list-area">
+            <li ng-click="toggleRight()" ng-class="assignment.completedYn === 'Y' ? 'list-item completed' : 'list-item'" ng-repeat="assignment in assignments | filter: filterType( 'type', selected_type) | filter : filterCompletion( 'completedYn', selected_completion)">
+              <span style="max-width: calc(100% - 390px);; overflow: hidden; text-overflow: ellipsis; display: inline-block; white-space: nowrap">{{ assignment.title }}</span>
+              <div ng-click="removeAssignment(assignment._id)" class="delete-activity"></div>
+              <div ng-click="setCompletedYn(assignment._id, assignment.completedYn)" ng-class="assignment.completedYn === 'Y' ? 'complete-activity-checked' : 'complete-activity'"></div>
+              <div ng-class="checkDateStatus(assignment)">
+                <md-datepicker
+                  ng-change="setAssignmentDueDate(assignment._id, $index)"
+                  ng-model="assignment_due_dates[findDateById('assignment', assignment._id)].date"
+                  md-placeholder="Enter date"
+                  md-open-on-focus
+                >
+                </md-datepicker>
+              </div>
+              <div class="type-area">
+                <md-select ng-change="setType(assignment._id, findIndexById('assignment', assignment._id))" ng-model="assignment_types[findIndexById('assignment', assignment._id)].type" placeholder="Type" class="md-no-underline">
+                  <md-option value="assignment">Assignment</md-option>
+                  <md-option value="meeting">Meeting</md-option>
+                  <md-option value="exam">Exam</md-option>
+                </md-select>
+              </div>
+            </li>
+          </ul>
+          <div ng-form name="assignmentInput" class="list-item">
+            <input
+              class="task-input"
+              placeholder="Type your assignments here!"
+              type="text"
+              ng-maxlength="80"
+              ng-model="assignment_input"
+              ng-enter="assignmentInput.$valid ? addAssignment() : null"
+              ng-blur="assignmentInput.$valid ? addAssignment() : null"
+            />
+          </div>
+          <p class="repeat-alarm" ng-show="!assignmentInput.$valid">Input content too long!</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div flex>
+    <md-sidenav  md-disable-backdrop class="md-sidenav-right md-whiteframe-4dp" md-component-id="rightPanel">
+     <md-toolbar class="md-theme-light">
+       <h1 class="md-toolbar-tools">Sidenav Right</h1>
+     </md-toolbar>
+     <md-content layout-padding>
+       <form>
+         <md-input-container>
+           <label for="testInput">Test input</label>
+           <input type="text" id="testInput"
+                  ng-model="data" md-autofocus>
+         </md-input-container>
+       </form>
+       <md-button ng-click="close()" class="md-primary">
+         Close Sidenav Right
+       </md-button>
+     </md-content>
+
+   </md-sidenav>
+  </div>
+
+</div>

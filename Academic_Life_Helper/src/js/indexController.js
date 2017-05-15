@@ -1,6 +1,29 @@
-app.controller('indexController', [ '$scope', '$http', '$cookies', function($scope, $http, $cookies){
+app.controller('indexController', [
+  '$scope',
+  '$http',
+  '$cookies',
+  '$route',
+  '$routeParams',
+  '$location',
+  '$mdDialog',
+  function(
+    $scope,
+    $http,
+    $cookies,
+    $route,
+    $routeParams,
+    $location,
+    $mdDialog
+  ){
 
+  // general variables
   $scope.selected_tab = 0;
+  $scope.warning_message = '';
+  $scope.isShowPreferences = false;
+  // routes setup
+  $scope.$route = $route;
+  $scope.$location = $location;
+  $scope.$routeParams = $routeParams;
 
   // data from user logged in
   if($cookies.get('user')) {
@@ -12,13 +35,6 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
     $scope.logged_user_info =  JSON.parse($cookies.get('user'));
     $scope.logged_username = $scope.logged_user_info.username;
   }
-
-  // Menu Controls
-  var originatorEv;
-  this.openMenu = function($mdMenu, ev) {
-    originatorEv = ev;
-    $mdMenu.open(ev);
-  };
 
   // CSS Selector
   $scope.selectedSheet = "index-light";
@@ -35,9 +51,9 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
           data   : { username : $scope.username_input }
         })
         .then(function(success) {
-          console.log(success)
           if(success.data.status === 'EXISTING_USERNAME') {
-            alert('Username already exists.')
+            $scope.warning_message = 'Username already exists.';
+            showDialog();
           } else if(success.data.status === 'SUCCESS'){
             $http({
               method : 'POST',
@@ -45,7 +61,8 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
               data   : { username : $scope.username_input, password : $scope.password_input }
             })
             .then(function(success) {
-              alert('Successfully Registered New User!');
+              $scope.warning_message = 'Successfully Registered New User!';
+              showDialog();
               //reset input fields and switch to login tab
               $scope.username_input = "";
               $scope.password_input = "";
@@ -54,7 +71,8 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
               // Uncomment below for testing
               // console.log(success)
             }, function(error) {
-              alert('Failed to Register New User.');
+              $scope.warning_message = 'Failed to Register New User.';
+              showDialog();
               // Uncomment below for testing
               console.log(error)
             });
@@ -63,7 +81,8 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
             console.log(error)
         });
       } else {
-        alert('Please verify that both passwords have the same value!');
+        $scope.warning_message = 'Please verify that both passwords have the same value!';
+        showDialog();
         return;
       }
   }
@@ -80,12 +99,14 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
         // Uncomment below for testing
         // console.log(success)
         if(success.data.status === 'USERNAME_NOT_FOUND') {
-          alert('Please confirm that the username is spelled correctly.');
+          $scope.warning_message = 'Please confirm that the username is spelled correctly.';
+          showDialog();
           return;
         }
 
         if(success.data.status === 'INCORRECT_PASSWORD') {
-          alert('Please confirm that you wrote your password correctly.');
+          $scope.warning_message = 'Please confirm that you wrote your password correctly.';
+          showDialog();
           return;
         }
         $cookies.putObject('user', success.data.user_info);
@@ -96,14 +117,61 @@ app.controller('indexController', [ '$scope', '$http', '$cookies', function($sco
         // console.log(error)
       });
     } else {
-      alert('Please input username and password');
+      $scope.warning_message = 'Please input username and password';
+      showDialog();
     }
-
   };
 
   $scope.logoutUser = function() {
     $cookies.remove('user');
+    $cookies.remove('selected_activity_id');
     window.location = '/';
+  }
+  // preference toggle
+  $scope.showPreferences = function() {
+    $scope.isShowPreferences = true;
+  }
+
+  $scope.hidePreferences = function() {
+    $scope.isShowPreferences = false;
+  }
+
+  // dialog template
+  function showDialog($event) {
+     var parentEl = angular.element(document.body);
+
+     $mdDialog.show({
+       parent: parentEl,
+       targetEvent: $event,
+       template:
+         '<md-dialog aria-label="List dialog">' +
+         '<md-toolbar class="dialog-header">' +
+           '<div class="md-toolbar-tools">' +
+             '<h2>Warning!</h2>' +
+             '<span flex></span>' +
+           '</div>' +
+         '</md-toolbar>' +
+         '  <md-dialog-content>'+
+         '    <md-list>'+
+                $scope.warning_message +
+         '    </md-list>'+
+         '  </md-dialog-content>' +
+         '  <md-dialog-actions>' +
+         '    <md-button ng-click="closeDialog()" class="md-primary">' +
+         '      Close Dialog' +
+         '    </md-button>' +
+         '  </md-dialog-actions>' +
+         '</md-dialog>',
+       locals: {
+         items: $scope.items
+       },
+       controller: DialogController
+    });
+    function DialogController($scope, $mdDialog, items) {
+      $scope.closeDialog = function() {
+        $mdDialog.hide();
+      }
+    }
   }
 }]).directive('ngEnter', function() {
     return function(scope, elem, attrs) {

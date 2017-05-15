@@ -1,0 +1,17 @@
+<calendar-md flex layout layout-fill
+  calendar-direction="horizontal"
+  on-prev-month="prevMonth"
+  on-next-month="nextMonth"
+  on-day-click="dayClick"
+  title-format="'MMMM y'"
+  ng-model='assignment_due_dates'
+  week-starts-on="firstDayOfWeek"
+  tooltips="true"
+  day-format="dayFormat"
+  day-label-format="'EEE'"
+  day-label-tooltip-format="'EEEE'"
+  day-tooltip-format="'fullDate'"
+  day-content="setDayContent"
+  disable-future-selection="false"
+  class="ng-pristine ng-untouched ng-valid layout-fill ng-isolate-scope layout-row flex"
+  ></calendar-md>

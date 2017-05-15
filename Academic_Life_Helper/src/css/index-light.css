@@ -102,6 +102,10 @@ body {
 .completed {
   background: #ceffe2;
 }
+.dialog-header {
+  padding: 0 !important;
+  background: #536d84 !important;
+}
 .greeting-msg {
   color: #00b6ff;
   border-bottom: 1px solid #00b6ff;
@@ -165,6 +169,10 @@ body {
   /*font-weight: bold;*/
   background-color: #7799b7;
 }
+.settings-button {
+  background: url(../img/settings-light.png) no-repeat 50% 50%;
+  background-size: 25px;
+}
 .task-input {
   border: none;
   border-radius: 0px !important;
@@ -189,7 +197,9 @@ body {
   color : currentColor;
   /*border: 1px solid  #536d84;*/
 }
-
+._md-nav-bar-list li a span:hover {
+  color: #fff;
+}
 .md-button:not([disabled]):hover {
   background-color: #536d84;
   color: #fff;
@@ -205,5 +215,18 @@ md-sidenav.md-default-theme, md-sidenav, md-sidenav.md-default-theme md-content,
 }
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
   padding: 20px 20px 0px 20px;
+  background: #fff;
+}
+.navbar-custom {
   background: none !important;
+}
+.md-toolbar-tools .md-button, .md-toolbar-tools .md-button.md-icon-button md-icon {
+  background: #ff4081;
+}
+.md-toolbar-tools .md-button:hover, .md-toolbar-tools .md-button.md-icon-button md-icon:hover {
+  color: #ff4081;
+}
+calendar-md .md-toolbar-tools h2 {
+  color: #000;
+  overflow: hidden;
 }

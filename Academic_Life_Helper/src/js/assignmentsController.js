@@ -4,31 +4,42 @@ app.controller('assignmentsController',
   '$http',
   '$mdToast',
   '$timeout',
+  '$filter',
+  'MaterialCalendarData',
   '$mdSidenav',
+  '$mdDialog',
   '$log',
+  '$sanitize',
   function(
     $scope,
     $http,
     $mdToast,
     $timeout,
+    $filter,
+    MaterialCalendarData,
     $mdSidenav,
-    $log
+    $mdDialog,
+    $log,
+    $sanitize
   ){
 
   // initialized variables to be shown on screen
-  $scope.assignments = [];
+  $scope.currentNavItem = window.location.pathname.split('/')[1];
+  $scope.titleArray = [];
+  // $scope.assignments = [];
   $scope.assignment_due_dates = [];
   $scope.assignment_types = [];
   $scope.last_deleted_assignment = {};
   $scope.selected_type = 'all';
   $scope.selected_completion = 'all';
   // selected array values
-  $scope.selected_activity_id = -1;
+  $scope.selected_activity_id = $scope.$parent.selected_activity_id;
 
   //Receive selected_activity_id from activitiesController
   $scope.$watch('$parent.selected_activity_id', function(newValue, oldValue) {
     $scope.selected_activity_id = newValue;
-    $scope.getAssignmentList()
+    $scope.getAssignmentList();
+    $scope.currentNavItem = 'classes'
   });
 
   // Assignment Controls
@@ -131,10 +142,10 @@ app.controller('assignmentsController',
     .then(function (success) {
       $scope.getAssignmentList()
       // Uncomment below for testing
-      // console.log(success)
+      // handleOnClick(success)
     }, function (error) {
       // Uncomment below for testing
-      // console.log(error)
+      // handleOnClick(error)
     });
   }
 
@@ -148,10 +159,10 @@ app.controller('assignmentsController',
       // Update type on assignments array
       $scope.assignments[index].type = $scope.assignment_types[index].type
       // Uncomment below for testing
-      // console.log(success)
+      // handleOnClick(success)
     }, function (error) {
       // Uncomment below for testing
-      // console.log(error)
+      // handleOnClick(error)
     });
   }
 
@@ -167,11 +178,11 @@ app.controller('assignmentsController',
         $scope.getAssignmentList()
         $scope.showActionToast()
         // Uncomment below for testing
-        // console.log(success)
+        // handleOnClick(success)
       },
       function(error){
         // Uncomment below for testing
-        // console.log(error)
+        // handleOnClick(error)
       }
     );
   };
@@ -193,6 +204,25 @@ app.controller('assignmentsController',
       return index;
     }
   };
+
+  $scope.checkDateStatus = function(assignment) {
+    var currentDateUnix = new Date().getTime() / 1000;
+    var thisDateUnix = new Date(assignment.dueDate).getTime() / 1000;
+    var currentDate =  $filter("date")(new Date(), "yyyyMMdd")
+    var thisDate =  $filter("date")(assignment.dueDate, "yyyyMMdd")
+    if (currentDate > thisDate) {
+      if(assignment.completedYn === 'Y') {
+        return 'datepicker-area'
+      } else {
+        return 'datepicker-area duedate-overdue'
+      }
+    }  else if (currentDate === thisDate) {
+      return 'datepicker-area duedate-warning'
+    } else {
+      return 'datepicker-area'
+    }
+
+  }
 
   $scope.filterType = function(prop, val) {
     if($scope.selected_type === 'all') {
@@ -243,7 +273,21 @@ app.controller('assignmentsController',
         });
     }, 200);
   }
-
+  // Right panel toggle
+  $scope.toggleRight = function(){
+    $mdSidenav('rightPanel').toggle()
+  }
+  $scope.toggleRight()
+  function buildToggler(navID) {
+      return function() {
+        // Component lookup should always be available since we are not using `ng-if`
+        $mdSidenav(navID)
+          .toggle()
+          .then(function () {
+            $log.debug("toggle " + navID + " is done");
+          });
+      };
+    }
   // Assignment undo toast
   var last = {
     bottom: false,
@@ -306,4 +350,90 @@ app.controller('assignmentsController',
       }
     });
   };
+
+
+// Calendar Controls
+    $scope.selectedDate = null;
+    $scope.firstDayOfWeek = 0;
+
+    function showDialog($event) {
+       var parentEl = angular.element(document.body);
+       var titleList = $scope.titleArray[$scope.titleArray.findIndex(x => x.date === $scope.selectedDate)].titles;
+       var dateComponent = [];
+
+       for(var i = 0; i <= titleList.length - 1; i++){
+         dateComponent.push('<div class="date_item">' + titleList[i] + '</div>')
+       }
+       $mdDialog.show({
+         parent: parentEl,
+         targetEvent: $event,
+         template:
+           '<md-dialog aria-label="List dialog">' +
+           '<md-toolbar class="dialog-header">' +
+             '<div class="md-toolbar-tools">' +
+               '<h2>'+ $scope.selectedDate + '</h2>' +
+               '<span flex></span>' +
+             '</div>' +
+           '</md-toolbar>' +
+           '  <md-dialog-content>'+
+           '    <md-list>'+
+                  dateComponent.join('') +
+           '    </md-list>'+
+           '  </md-dialog-content>' +
+           '  <md-dialog-actions>' +
+           '    <md-button ng-click="closeDialog()" class="md-primary">' +
+           '      Close Dialog' +
+           '    </md-button>' +
+           '  </md-dialog-actions>' +
+           '</md-dialog>',
+         locals: {
+           items: $scope.items
+         },
+         controller: DialogController
+      });
+      function DialogController($scope, $mdDialog, items) {
+        $scope.closeDialog = function() {
+          $mdDialog.hide();
+        }
+      }
+    }
+
+    $scope.showDayContents = function(ev) {
+      var titleList = $scope.titleArray[$scope.titleArray.findIndex(x => x.date === $scope.selectedDate)].titles;
+      dateComponent = [];
+      for(var i = 0; i <= titleList.length - 1; i++){
+        dateComponent.push('<div class="date_item">' + titleList[i] + '</div>')
+      }
+
+
+    };
+
+    $scope.dayClick = function(date) {
+      $scope.selectedDate = $filter("date")(date, "yyyy-MM-dd");
+      showDialog();
+    };
+
+    $scope.setContentViaService = function(date, title) {
+      dateComponent = [];
+      for(var i = 0; i <= title.length - 1; i++){
+        dateComponent.push('<div class="date_item">' + title[i] + '</div>')
+      }
+
+      MaterialCalendarData.setDayContent(date, dateComponent.join('') )
+    }
+
+    $scope.setDayContent = function(date) {
+      MaterialCalendarData.setDayContent(date, '<div> </div>' );
+      var title = [];
+      for(var j = 0; j <= $scope.assignments.length - 1; j++) {
+        if($filter("date")(date, "yyyy-MM-dd") == $scope.assignments[j].dueDate.substring(0, 10)){
+          title.push($scope.assignments[j].title)
+        }
+      }
+
+      $scope.titleArray.push({ date : $filter("date")(date, "yyyy-MM-dd"), titles : title });
+
+      $scope.setContentViaService(date, title)
+    };
+
 }]);

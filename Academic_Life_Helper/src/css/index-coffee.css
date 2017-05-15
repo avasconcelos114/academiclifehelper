@@ -103,8 +103,9 @@ body {
 .completed {
   background: #fdf4db;
 }
-.delete-activity {
-
+.dialog-header {
+  padding: 0 !important;
+  background: #888078 !important;
 }
 .greeting-msg {
   color: #d2a17c;
@@ -165,6 +166,10 @@ body {
   font-weight: bold;
   background-color: #928a83;
 }
+.settings-button {
+  background: url(../img/settings-coffee.png) no-repeat 50% 50%;
+  background-size: 25px;
+}
 .task-input {
   border: none;
   border-radius: 0px !important;
@@ -192,7 +197,7 @@ body {
 
 .md-button:not([disabled]):hover {
   background-color: #888078;
-  color: #fff;
+  color: #fff !important;
 }
 
 .md-button[disabled] {
@@ -205,5 +210,18 @@ md-sidenav.md-default-theme, md-sidenav, md-sidenav.md-default-theme md-content,
 }
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
   padding: 20px 20px 0px 20px;
+  background: #fff;
+}
+.navbar-custom {
   background: none !important;
+}
+.md-toolbar-tools .md-button, .md-toolbar-tools .md-button.md-icon-button md-icon {
+  background: #888078;
+}
+.md-toolbar-tools .md-button:hover, .md-toolbar-tools .md-button.md-icon-button md-icon:hover {
+  color: #888078;
+}
+calendar-md .md-toolbar-tools h2 {
+  color: #000;
+  overflow: hidden;
 }

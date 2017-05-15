@@ -9,28 +9,33 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <!-- Styles -->
-    <link rel="stylesheet" ng-href="../bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" ng-href="../bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" ng-href="../bower_components/material-calendar/angular-material-calendar.min.css">
     <link rel="stylesheet" ng-href="src/css/{{ selectedSheet }}.css">
     <link rel="stylesheet" ng-href="src/css/fixed-style.css">
     <link rel="stylesheet" ng-href="src/css/bootstrap.css">
     <!-- Angular Imports -->
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-animate/angular-animate.js"></script>
-    <script src="../bower_components/angular-aria/angular-aria.js"></script>
-    <script src="../bower_components/angular-messages/angular-messages.js"></script>
-    <script src="../bower_components/angular-material/angular-material.js"></script>
-    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="../bower_components/angular-material/angular-material.min.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/material-calendar/angular-material-calendar.min.js"></script>
     <script src="src/js/app.module.js"></script>
     <!-- Controllers -->
     <script src="src/js/indexController.js"></script>
     <script src="src/js/activitiesController.js"></script>
     <script src="src/js/assignmentsController.js"></script>
+    <script src="src/js/preferencesController.js"></script>
 
     <script type="text/javascript">
     //<![CDATA[
 
     if (screen.width <= 699 || navigator.userAgent.match("iPad")) {
-      document.location = "/src/mobile.html";
+      window.location.pathname = "/classesMobile";
     }
 
     //]]>
@@ -47,13 +52,13 @@
         md-is-locked-open="$mdMedia('gt-sm')"
         md-whiteframe="4">
 
-          <md-toolbar class="md-theme-indigo">
-            <md-menu>
-              <img class="settings-button" src="src/img/settings.png" ng-click="$mdMenu.open()" />
+          <md-toolbar class="md-theme-indigo navbar-custom">
+            <md-menu md-offset="30 30">
+              <div class="settings-button" ng-click="$mdMenu.open()"></div>
 
-              <md-menu-content width="4">
+              <md-menu-content  ng-mouseleave="$mdMenu.close()" width="4">
                 <md-menu-item>
-                  <md-button class="menu-item-button" ng-click="">
+                  <md-button class="menu-item-button" ng-click="togglePreferences()">
                     Account Preferences
                   </md-button>
                 </md-menu-item>
@@ -97,81 +102,29 @@
               <p class="repeat-alarm" ng-show="!activityInput.$valid">Input content too long!</p>
             </div>
           </md-content>
-
         </md-sidenav>
 
           <div ng-controller="assignmentsController" flex-sm="100" flex-xs="100" class="max-height right-panel">
-            <div  style="overflow: hidden;" class="body-container" >
+
+            <div ng-if="!isShowPreferences">
               <md-button style="position: fixed; right: 5px; top: 5px;" hide-gt-sm ng-click="toggleLeft()" class="md-fab" aria-label="Comment">
                 <img width="35px" src="src/img/ic_reorder_white_24dp_2x.png" />
               </md-button>
-              <div class="header-area">
-                <h1 class="activity-header" ng-show="selected_activity_id != -1">{{ activities[findIndexById('activity', selected_activity_id)].title }}</h1></br>
-                <h2 class="activity-header" ng-show="selected_activity_id != -1">To-dos</h2>
-              </div>
-              <div ng-show="selected_activity_id != -1" class="search-area">
-                <input class="search_input" ng-change="searchAssignment()" placeholder="Search..." ng-model="search_input" type="text" />
-                <md-button ng-click="searchAssignment()">Search</md-button>
-                <br />
+              <md-nav-bar md-selected-nav-item="currentNavItem">
+                <md-nav-item md-nav-href="classes" name="classes">
+                  Assignments
+                </md-nav-item>
+                <md-nav-item md-nav-href="calendar" name="calendar">Calendar</md-nav-item>
+                <!--<md-nav-item md-nav-href="dashboard" name="dashboard">Dashboard</md-nav-item> -->
+              </md-nav-bar>
 
-                <md-select style="width: 160px; display: inline-block" ng-model="selected_type" placeholder="Type Filter" class="md-no-underline">
-                  <md-option value="all">All - Types</md-option>
-                  <md-option value="assignment">Assignment</md-option>
-                  <md-option value="meeting">Meeting</md-option>
-                  <md-option value="exam">Exam</md-option>
-                </md-select>
+              <div ng-view></div>
+            </div>
 
-                <md-select style="width: 160px; display: inline-block" ng-model="selected_completion" placeholder="Completion Filter" class="md-no-underline">
-                  <md-option value="all">All - Progress</md-option>
-                  <md-option value="Y">Completed</md-option>
-                  <md-option value="N">In Progress</md-option>
-                </md-select>
-
-              </div>
-              <div layout="row">
-                <div class="flex-padding max-height" flex="100">
-                  <div ng-show="selected_activity_id != -1">
-                    <ul class="list-area">
-                      <li ng-class="assignment.completedYn === 'Y' ? 'list-item completed' : 'list-item'" ng-repeat="assignment in assignments | filter: filterType( 'type', selected_type) | filter : filterCompletion( 'completedYn', selected_completion)">
-                        <span style="max-width: calc(100% - 390px);; overflow: hidden; text-overflow: ellipsis; display: inline-block; white-space: nowrap">{{ assignment.title }}</span>
-                        <div ng-click="removeAssignment(assignment._id)" class="delete-activity"></div>
-                        <div ng-click="setCompletedYn(assignment._id, assignment.completedYn)" ng-class="assignment.completedYn === 'Y' ? 'complete-activity-checked' : 'complete-activity'"></div>
-                        <div class="datepicker-area">
-                          <md-datepicker
-                            ng-change="setAssignmentDueDate(assignment._id, $index)"
-                            ng-model="assignment_due_dates[findDateById('assignment', assignment._id)].date"
-                            md-placeholder="Enter date"
-                            md-open-on-focus
-                          >
-                          </md-datepicker>
-                        </div>
-                        <div class="type-area">
-                          <md-select ng-change="setType(assignment._id, findIndexById('assignment', assignment._id))" ng-model="assignment_types[findIndexById('assignment', assignment._id)].type" placeholder="Type" class="md-no-underline">
-                            <md-option value="assignment">Assignment</md-option>
-                            <md-option value="meeting">Meeting</md-option>
-                            <md-option value="exam">Exam</md-option>
-                          </md-select>
-                        </div>
-                      </li>
-
-                    </ul>
-                    <div ng-form name="assignmentInput" class="list-item">
-                      <input
-                        class="task-input"
-                        placeholder="Type your assignments here!"
-                        type="text"
-                        ng-maxlength="80"
-                        ng-model="assignment_input"
-                        ng-enter="assignmentInput.$valid ? addAssignment() : null"
-                        ng-blur="assignmentInput.$valid ? addAssignment() : null"
-                      />
-                    </div>
-                    <p class="repeat-alarm" ng-show="!assignmentInput.$valid">Input content too long!</p>
-                  </div>
-                </div>
-              </div>
+            <div ng-if="isShowPreferences">
 
             </div>
+
           </div>
 
       </div>
