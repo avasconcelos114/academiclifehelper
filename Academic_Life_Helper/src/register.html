@@ -50,7 +50,7 @@
               <div layout="row">
                 <md-input-container flex="100">
                   <label>Username</label>
-                  <input no-special-char no-space-validation required name="username" minlength="4" maxlength="15" ng-model="login_username_input">
+                  <input no-special-char no-space-validation md-autofocus required name="username" minlength="4" maxlength="15" ng-model="login_username_input">
                   <div ng-messages="loginForm.username.$error">
                     <div ng-message="required">This is a required field.</div>
                     <div ng-message-exp="['minlength', 'maxlength']">Please input a username between 4 and 15 characters long.</div>

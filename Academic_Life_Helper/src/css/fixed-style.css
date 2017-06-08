@@ -1,5 +1,5 @@
 html, body {
-  font-family: 'Source Sans Pro', Roboto !important;
+  font-family: 'Source Sans Pro', Roboto, Noto !important;
 }
 .activity-list-area {
   max-height: calc(100% - 140px);
@@ -50,12 +50,32 @@ html, body {
   margin-top: 8px;
   cursor: pointer;
 }
-.date_item {
+.date-item {
   margin-top: 5px;
+  background: #dee0e0;
+  padding: 0px 10px 0px 10px !important;
   width: 100%;
+  height: 30px;
+  line-height: 30px;
+  /*text-indent: 5px;*/
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  border-radius: 4px;
+}
+.date-item-completed {
+  margin-top: 5px;
+  background: #65b800;
+  color: #fff;
+  padding: 0px 10px 0px 10px !important;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  /*text-indent: 5px;*/
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: 4px;
 }
 .delete-activity {
   display: inline-block;
@@ -92,6 +112,7 @@ html, body {
   padding-left: 0px;
   overflow-x: hidden;
   margin-bottom: 0px;
+  padding-top: 5px;
 }
 .login_panel {
   width: 600px;

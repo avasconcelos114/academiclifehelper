@@ -84,10 +84,10 @@
                 <li style="cursor: pointer" ng-class="selected_activity_id === activity._id ? 'activity-list-item selected-item' : 'activity-list-item'" ng-click="selectActivity(activity._id)" ng-repeat="activity in activities">
                   <div ng-class="selected_activity_id === activity._id ? 'activity-list-icon-selected' : 'activity-list-icon'"></div>
                   <span>{{ activity.title }}</span>
-                  <div ng-click="removeActivity(activity._id)" class="delete-activity"></div>
+                  <div ng-click="removeActivityDialog(activity._id)" class="delete-activity"></div>
                 </li>
               </ul>
-              <div ng-form name="activityInput" class="list-item">
+              <div ng-form name="activityInput">
                 <input
                   ng-maxlength="30"
                   class="activity-input"

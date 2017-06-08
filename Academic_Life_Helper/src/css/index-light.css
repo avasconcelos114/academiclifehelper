@@ -24,7 +24,6 @@ body {
   border-radius: 4px;
   position: relative;
   right: 5px;
-
 }
 .activity-input:focus {
   background-color: #7799b7;
@@ -100,7 +99,10 @@ body {
   height: 100%;
 }
 .completed {
-  background: #ceffe2;
+  background: #ceffe2 !important;
+}
+.completed:hover {
+  background: #bcfdd6 !important;
 }
 .dialog-header {
   padding: 0 !important;
@@ -126,8 +128,35 @@ body {
   line-height: 33px;
   text-indent: 5px;
   width: 100%;
+  background: #FAFAFA;
   height: 35px;
   border-bottom: 1px solid #e1e2e4;
+}
+.list-item:hover {
+  animation-name: listItemHover;
+  animation-duration: 0.25s;
+  animation-fill-mode: forwards;
+  z-index: 6;
+  background: #EEEEEE;
+}
+@keyframes listItemHover {
+    0% {
+      box-shadow: none;
+      position: relative;
+      bottom: 0px;
+    }
+    50% {
+      position: relative;
+      bottom: 2px;
+    }
+    100% {
+      box-shadow: 1px 7px 10px -5px rgba(107,107,107,0.54);
+      position: relative;
+      bottom: 3px;
+    }
+}
+.list-item:focus {
+  outline: none;
 }
 .name-input {
   border: 1px solid gray;
@@ -136,6 +165,18 @@ body {
   text-indent: 10px;
   margin: 0;
   border-radius: 4px;
+}
+.property-title-input {
+  border: none !important;
+  width: 100%;
+  padding: 5px;
+  font-size: 18px;
+  background: none !important;
+  color: #fff;
+}
+.property-title-input:focus {
+  border: 1px solid gray !important;
+  outline: none;
 }
 .repeat-alarm {
   font-weight: bold;

@@ -83,6 +83,14 @@
 
     UserSchema.plugin(autoIncrement.plugin, 'User');
     var User = mongoose.model('User', UserSchema);
+
+    var typeSchema = new Schema({
+      typeName : String,
+    }, { collection : 'types'});
+
+    typeSchema.plugin(autoIncrement.plugin, 'Type');
+    var Type = mongoose.model('Type', typeSchema);
+
     // listen (start app with node server.js) ======================================
     app.listen(1337);
 
@@ -161,6 +169,23 @@
         console.log(assignments)
         res.json(assignments)
       });
+    });
+
+    // Edit any details on right sidebar
+    app.put('/api/assignment/details/:assignment_id', function(req, res){
+        var query = { _id  : req.params.assignment_id };
+
+        Assignment.findOneAndUpdate(query,
+          {
+            title       : req.body.title,
+            startDate   : req.body.startDate,
+            dueDate     : req.body.dueDate ,
+            description : req.body.description,
+            completedYn : req.body.completedYn
+          }, {upsert : true}, function(err){
+          if(err) { return res.send(err) }
+          return res.send("SUCCESS")
+        });
     });
 
     app.put('/api/assignment/date/:assignment_id', function(req, res){

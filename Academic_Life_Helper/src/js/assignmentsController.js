@@ -32,6 +32,7 @@ app.controller('assignmentsController',
   $scope.last_deleted_assignment = {};
   $scope.selected_type = 'all';
   $scope.selected_completion = 'all';
+  $scope.search_input = '';
   // selected array values
   $scope.selected_activity_id = $scope.$parent.selected_activity_id;
 
@@ -72,7 +73,8 @@ app.controller('assignmentsController',
   $scope.searchAssignment = function() {
     $scope.assignment_types     = [];
     $scope.assignment_due_dates = [];
-    if( $scope.search_input.length > 0) {
+
+    if( $scope.search_input.length > 0 && $scope.search_input !== '') {
       $http({
         method : 'GET',
         url    : '/api/' + $scope.selected_activity_id + '/assignments/search/' + $scope.search_input
@@ -217,7 +219,12 @@ app.controller('assignmentsController',
         return 'datepicker-area duedate-overdue'
       }
     }  else if (currentDate === thisDate) {
-      return 'datepicker-area duedate-warning'
+      if(assignment.completedYn === 'Y') {
+        return 'datepicker-area'
+      } else {
+        return 'datepicker-area duedate-warning'
+      }
+      return 'datepicker-area duedate-'
     } else {
       return 'datepicker-area'
     }
@@ -274,20 +281,15 @@ app.controller('assignmentsController',
     }, 200);
   }
   // Right panel toggle
-  $scope.toggleRight = function(){
-    $mdSidenav('rightPanel').toggle()
+  $scope.openRight = function(assignment){
+    $scope.selected_assignment = assignment
+    $mdSidenav('rightPanel').open()
   }
-  $scope.toggleRight()
-  function buildToggler(navID) {
-      return function() {
-        // Component lookup should always be available since we are not using `ng-if`
-        $mdSidenav(navID)
-          .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      };
-    }
+
+  $scope.closeRight = function(){
+    $mdSidenav('rightPanel').close()
+  }
+
   // Assignment undo toast
   var last = {
     bottom: false,
@@ -358,12 +360,15 @@ app.controller('assignmentsController',
 
     function showDialog($event) {
        var parentEl = angular.element(document.body);
-       var titleList = $scope.titleArray[$scope.titleArray.findIndex(x => x.date === $scope.selectedDate)].titles;
+       var titleList = $scope.titleArray[$scope.titleArray.findIndex(x => x.date === $scope.selectedDate)].titleList;
+
        var dateComponent = [];
 
        for(var i = 0; i <= titleList.length - 1; i++){
-         dateComponent.push('<div class="date_item">' + titleList[i] + '</div>')
+         if(titleList[i].completedYn === 'Y') dateComponent.push('<div class="date-item-completed">' + titleList[i].title + '</div>')
+         else dateComponent.push('<div class="date-item">' + titleList[i].title + '</div>')
        }
+
        $mdDialog.show({
          parent: parentEl,
          targetEvent: $event,
@@ -399,13 +404,15 @@ app.controller('assignmentsController',
     }
 
     $scope.showDayContents = function(ev) {
-      var titleList = $scope.titleArray[$scope.titleArray.findIndex(x => x.date === $scope.selectedDate)].titles;
+      var titleList = $scope.titleArray[$scope.titleArray.findIndex(x => x.date === $scope.selectedDate)].titleList;
       dateComponent = [];
       for(var i = 0; i <= titleList.length - 1; i++){
-        dateComponent.push('<div class="date_item">' + titleList[i] + '</div>')
+        if(titleList[i].completedYn === 'Y') {
+          dateComponent.push('<div class="date-item-completed">' + titleList[i].title + '</div>')
+        } else {
+          dateComponent.push('<div class="date-item">' + titleList[i].title + '</div>')
+        }
       }
-
-
     };
 
     $scope.dayClick = function(date) {
@@ -413,10 +420,15 @@ app.controller('assignmentsController',
       showDialog();
     };
 
-    $scope.setContentViaService = function(date, title) {
+    $scope.setContentViaService = function(date, titleList) {
       dateComponent = [];
-      for(var i = 0; i <= title.length - 1; i++){
-        dateComponent.push('<div class="date_item">' + title[i] + '</div>')
+      for(var i = 0; i <= titleList.length - 1; i++){
+        if(titleList[i].completedYn === 'Y') {
+          dateComponent.push('<div class="date-item-completed">' + titleList[i].title + '</div>')
+        } else {
+          dateComponent.push('<div class="date-item">' + titleList[i].title + '</div>')
+        }
+
       }
 
       MaterialCalendarData.setDayContent(date, dateComponent.join('') )
@@ -424,16 +436,16 @@ app.controller('assignmentsController',
 
     $scope.setDayContent = function(date) {
       MaterialCalendarData.setDayContent(date, '<div> </div>' );
-      var title = [];
+      var titleList = [];
       for(var j = 0; j <= $scope.assignments.length - 1; j++) {
         if($filter("date")(date, "yyyy-MM-dd") == $scope.assignments[j].dueDate.substring(0, 10)){
-          title.push($scope.assignments[j].title)
+          titleList.push({ title : $scope.assignments[j].title, completedYn: $scope.assignments[j].completedYn })
         }
       }
 
-      $scope.titleArray.push({ date : $filter("date")(date, "yyyy-MM-dd"), titles : title });
+      $scope.titleArray.push({ date : $filter("date")(date, "yyyy-MM-dd"), titleList : titleList  });
 
-      $scope.setContentViaService(date, title)
+      $scope.setContentViaService(date, titleList)
     };
 
 }]);

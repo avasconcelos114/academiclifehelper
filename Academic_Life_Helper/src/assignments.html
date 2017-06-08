@@ -25,10 +25,10 @@
 
     <div style="margin-top: 30px" layout="row">
       <div class="max-height" flex="100">
-        <div ng-show="selected_activity_id != -1">
+        <div ng-show="selected_activity_id !== -1">
           <ul class="list-area">
-            <li ng-click="toggleRight()" ng-class="assignment.completedYn === 'Y' ? 'list-item completed' : 'list-item'" ng-repeat="assignment in assignments | filter: filterType( 'type', selected_type) | filter : filterCompletion( 'completedYn', selected_completion)">
-              <span style="max-width: calc(100% - 390px);; overflow: hidden; text-overflow: ellipsis; display: inline-block; white-space: nowrap">{{ assignment.title }}</span>
+            <li  ng-class="assignment.completedYn === 'Y' ? 'list-item completed' : 'list-item'" ng-repeat="assignment in assignments | filter: filterType( 'type', selected_type) | filter : filterCompletion( 'completedYn', selected_completion)">
+              <span ng-click="openRight(assignment)" style="width: calc(100% - 390px); overflow: hidden; text-overflow: ellipsis; display: inline-block; white-space: nowrap; outline: none">{{ assignment.title }}</span>
               <div ng-click="removeAssignment(assignment._id)" class="delete-activity"></div>
               <div ng-click="setCompletedYn(assignment._id, assignment.completedYn)" ng-class="assignment.completedYn === 'Y' ? 'complete-activity-checked' : 'complete-activity'"></div>
               <div ng-class="checkDateStatus(assignment)">
@@ -49,8 +49,9 @@
               </div>
             </li>
           </ul>
-          <div ng-form name="assignmentInput" class="list-item">
+          <div ng-form name="assignmentInput">
             <input
+              ng-show="selected_activity_id !== -1"
               class="task-input"
               placeholder="Type your assignments here!"
               type="text"
@@ -70,22 +71,22 @@
 
   <div flex>
     <md-sidenav  md-disable-backdrop class="md-sidenav-right md-whiteframe-4dp" md-component-id="rightPanel">
-     <md-toolbar class="md-theme-light">
-       <h1 class="md-toolbar-tools">Sidenav Right</h1>
+     <md-toolbar class="md-theme-light navbar-custom">
+       <h1 class="md-toolbar-tools">
+           <input
+              type="text"
+              class="property-title-input"
+              ng-model="selected_assignment.title"
+           >
+      </h1>
      </md-toolbar>
      <md-content layout-padding>
-       <form>
-         <md-input-container>
-           <label for="testInput">Test input</label>
-           <input type="text" id="testInput"
-                  ng-model="data" md-autofocus>
-         </md-input-container>
-       </form>
-       <md-button ng-click="close()" class="md-primary">
+
+       <md-button ng-click="closeRight()" class="md-primary">
          Close Sidenav Right
        </md-button>
-     </md-content>
 
+     </md-content>
    </md-sidenav>
   </div>
 
