@@ -174,14 +174,15 @@
     // Edit any details on right sidebar
     app.put('/api/assignment/details/:assignment_id', function(req, res){
         var query = { _id  : req.params.assignment_id };
-
+        console.log(req.body.completedYn)
         Assignment.findOneAndUpdate(query,
           {
             title       : req.body.title,
             startDate   : req.body.startDate,
             dueDate     : req.body.dueDate ,
             description : req.body.description,
-            completedYn : req.body.completedYn
+            completedYn : req.body.completedYn,
+            type        : req.body.type
           }, {upsert : true}, function(err){
           if(err) { return res.send(err) }
           return res.send("SUCCESS")
@@ -222,7 +223,8 @@
           type        : req.body.type ? req.body.type : 'assignment',
           startDate   : req.body.startDate ? req.body.startDate : new Date(),
           dueDate     : req.body.dueDate ? req.body.dueDate : new Date(),
-          completedYn : req.body.completedYn ? req.body.completedYn : 'N'
+          completedYn : req.body.completedYn ? req.body.completedYn : 'N',
+          description : req.body.description ? req.body.description : ''
         }
         var assignment = new Assignment(requestBody);
         assignment.save(function (err) {

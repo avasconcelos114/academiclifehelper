@@ -28,6 +28,7 @@ app.controller('assignmentsController',
   $scope.titleArray = [];
   // $scope.assignments = [];
   $scope.assignment_due_dates = [];
+  $scope.assignment_start_dates = [];
   $scope.assignment_types = [];
   $scope.last_deleted_assignment = {};
   $scope.selected_type = 'all';
@@ -47,6 +48,7 @@ app.controller('assignmentsController',
   $scope.getAssignmentList = function(){
     $scope.assignment_types     = [];
     $scope.assignment_due_dates = [];
+    $scope.assignment_start_dates = [];
     $http({
       method : 'GET',
       url    : '/api/' + $scope.selected_activity_id + '/assignments'
@@ -56,10 +58,12 @@ app.controller('assignmentsController',
         $scope.assignments = success.data
         // create date array for datepicker & types
         for(i = 0; i <= success.data.length - 1; i++) {
-          var date_object = { _id: success.data[i]._id, date : new Date(success.data[i].dueDate) }
-          $scope.assignment_due_dates.push(date_object)
+          var start_date_object = { _id: success.data[i]._id, date : new Date(success.data[i].startDate) }
+          var due_date_object   = { _id: success.data[i]._id, date : new Date(success.data[i].dueDate) }
+          var type_object       = { _id: success.data[i]._id, type : success.data[i].type }
 
-          var type_object = { _id: success.data[i]._id, type : success.data[i].type }
+          $scope.assignment_start_dates.push(start_date_object)
+          $scope.assignment_due_dates.push(due_date_object)
           $scope.assignment_types.push(type_object)
         }
       },
@@ -119,11 +123,14 @@ app.controller('assignmentsController',
     }
   };
 
-  $scope.setAssignmentDueDate = function(assignment_id, index) {
+  $scope.setAssignmentDate = function(assignment_id, index) {
     $http({
       method : 'PUT',
       url    : '/api/assignment/date/' + assignment_id,
-      data   : { dueDate : $scope.assignment_due_dates[index].date}
+      data   : {
+                dueDate   : $scope.assignment_due_dates[index].date,
+                startDate : $scope.assignment_start_dates[index].date
+               }
     })
     .then(function (success) {
       $scope.getAssignmentList()
@@ -191,8 +198,11 @@ app.controller('assignmentsController',
 
   //utils
   $scope.findDateById = function(type, id) {
-    if (type === 'assignment' ){
+    if (type === 'dueDate' ){
       var index = $scope.assignment_due_dates.findIndex(x => x._id === id)
+      return index;
+    } else if (type === 'startDate') {
+      var index = $scope.assignment_start_dates.findIndex(x => x._id === id)
       return index;
     }
   };
@@ -280,9 +290,10 @@ app.controller('assignmentsController',
         });
     }, 200);
   }
-  // Right panel toggle
+  // Right panel controls
   $scope.openRight = function(assignment){
     $scope.selected_assignment = assignment
+
     $mdSidenav('rightPanel').open()
   }
 
@@ -290,6 +301,25 @@ app.controller('assignmentsController',
     $mdSidenav('rightPanel').close()
   }
 
+  $scope.updateProperties = function() {
+    $http({
+      method : 'PUT',
+      url    : '/api/assignment/details/' + $scope.selected_assignment._id,
+      data   : {
+                  title       : $scope.selected_assignment.title,
+                  startDate   : $scope.assignment_start_dates[$scope.findDateById('startDate', $scope.selected_assignment._id)].date,
+                  dueDate     : $scope.assignment_due_dates[$scope.findDateById('dueDate', $scope.selected_assignment._id)].date,
+                  description : $scope.selected_assignment.description,
+                  completedYn : $scope.selected_assignment.completedYn,
+                  type        : $scope.assignment_types[$scope.findIndexById('assignment', $scope.selected_assignment._id)].type
+               }
+    })
+    .then(function (success) {
+
+    }, function (error) {
+
+    });
+  }
   // Assignment undo toast
   var last = {
     bottom: false,

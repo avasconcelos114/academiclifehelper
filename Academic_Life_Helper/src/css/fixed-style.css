@@ -129,6 +129,26 @@ html, body {
   color: #fff;
   margin: 0;
 }
+.right-panel-bottom {
+  position: absolute;
+  bottom: 0;
+}
+.right-panel-field-container {
+  padding: 0px 0px 0px 15px;
+  margin-top: 15px;
+  width: 100%;
+  height: inherit;
+}
+.right-panel-field-container label {
+  text-indent: 2px;
+}
+.right-panel-datepicker-container {
+  display: table-cell;
+  width: 50%;
+}
+.right-panel-datepicker-container label {
+  text-indent: 15px;
+}
 .row-height {
   display: table;
   table-layout: fixed;
@@ -213,6 +233,9 @@ html, body {
 }
 md-sidenav {
   width: 350px !important;
+}
+.md-sidenav-right {
+  width: 430px !important;
 }
 md-select {
   margin: 0px 20px 0px 0px !important;

@@ -33,8 +33,8 @@
               <div ng-click="setCompletedYn(assignment._id, assignment.completedYn)" ng-class="assignment.completedYn === 'Y' ? 'complete-activity-checked' : 'complete-activity'"></div>
               <div ng-class="checkDateStatus(assignment)">
                 <md-datepicker
-                  ng-change="setAssignmentDueDate(assignment._id, $index)"
-                  ng-model="assignment_due_dates[findDateById('assignment', assignment._id)].date"
+                  ng-change="setAssignmentDate(assignment._id, $index)"
+                  ng-model="assignment_due_dates[findDateById('dueDate', assignment._id)].date"
                   md-placeholder="Enter date"
                   md-open-on-focus
                 >
@@ -71,20 +71,68 @@
 
   <div flex>
     <md-sidenav  md-disable-backdrop class="md-sidenav-right md-whiteframe-4dp" md-component-id="rightPanel">
-     <md-toolbar class="md-theme-light navbar-custom">
-       <h1 class="md-toolbar-tools">
-           <input
-              type="text"
-              class="property-title-input"
-              ng-model="selected_assignment.title"
-           >
-      </h1>
+     <md-toolbar ng-form name="assignmentTitle" class="md-theme-light navbar-custom">
+       <div
+          ng-click="selected_assignment.completedYn === 'N' ? selected_assignment.completedYn = 'Y' : selected_assignment.completedYn = 'N';
+                    updateProperties()"
+          ng-model="selected_assignment.completedYn"
+          ng-class="selected_assignment.completedYn === 'Y' ? 'complete-activity-checked' : 'complete-activity'">
+        </div>
+       <input
+          type="text"
+          class="property-title-input"
+          ng-model="selected_assignment.title"
+          ng-maxlength="80"
+          ng-blur="assignmentTitle.$valid ? updateProperties() : null"
+       >
      </md-toolbar>
-     <md-content layout-padding>
+     <md-content style="height: calc(100% - 95px)" layout-padding>
+       <div class="right-panel-contents">
 
-       <md-button ng-click="closeRight()" class="md-primary">
-         Close Sidenav Right
-       </md-button>
+         <div  class="right-panel-datepicker-container">
+           <label>Start Date: </label>
+           <md-datepicker
+             ng-change="updateProperties()"
+             ng-model="assignment_start_dates[findDateById('startDate', selected_assignment._id)].date"
+             md-placeholder="Enter date"
+             md-open-on-focus
+           >
+           </md-datepicker>
+         </div>
+
+         <div class="right-panel-datepicker-container">
+           <label>Due Date: </label>
+           <md-datepicker
+             ng-change="updateProperties()"
+             ng-model="assignment_due_dates[findDateById('dueDate', selected_assignment._id)].date"
+             md-placeholder="Enter date"
+             md-open-on-focus
+           >
+           </md-datepicker>
+         </div>
+
+         <div class="right-panel-field-container">
+           <md-select ng-change="updateProperties()" ng-model="assignment_types[findIndexById('assignment', selected_assignment._id)].type" placeholder="Type" class="md-no-underline">
+             <md-option value="assignment">Assignment</md-option>
+             <md-option value="meeting">Meeting</md-option>
+             <md-option value="exam">Exam</md-option>
+           </md-select>
+         </div>
+
+         <div class="right-panel-field-container" style="padding-right: 10px">
+           <label>Description</label>
+           <textarea ng-blur="updateProperties()" ng-model="selected_assignment.description">
+
+           </textarea>
+         </div>
+
+       </div>
+
+       <div class="right-panel-bottom">
+         <md-button ng-click="closeRight()" class="md-primary">
+           CLOSE TAB
+         </md-button>
+       </div>
 
      </md-content>
    </md-sidenav>

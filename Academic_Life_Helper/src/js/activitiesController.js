@@ -145,9 +145,6 @@ app.controller('activitiesController',
     openDialog();
   };
 
-
-
-
   $scope.removeAssignmentFromActivity = function(activity_id) {
     $http({
       method : 'DELETE',
@@ -166,7 +163,6 @@ app.controller('activitiesController',
   };
 
   // Run on pageload
-
   if($cookies.get('user')) {
     $scope.logged_user = JSON.parse($cookies.get('user'));
 
