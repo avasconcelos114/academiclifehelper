@@ -222,7 +222,8 @@ html, body {
   background-size: 27px;
 }
 .md-datepicker-input {
-  min-width: 85px;
+  min-width: 70px;
+  max-width: 70px;
 }
 .md-datepicker-triangle-button.md-button.md-icon-button {
   visibility: hidden;

@@ -8,7 +8,7 @@
     var bodyParser       = require('body-parser');
     var methodOverride   = require('method-override');
     var autoIncrement    = require('mongoose-auto-increment');
-    var bcrypt           = require('bcrypt'),
+    var bcrypt           = require('bcryptjs'),
     SALT_WORK_FACTOR = 10;
     // configuration =================
     var MongoDB = 'mongodb://magistrall:avasconcelos114@127.0.0.1:27017/admin';
