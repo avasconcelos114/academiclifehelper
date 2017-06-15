@@ -10,6 +10,8 @@ app.controller('assignmentsController',
   '$mdDialog',
   '$log',
   '$sanitize',
+  '$route',
+  '$location',
   function(
     $scope,
     $http,
@@ -20,34 +22,40 @@ app.controller('assignmentsController',
     $mdSidenav,
     $mdDialog,
     $log,
-    $sanitize
+    $sanitize,
+    $route,
+    $location
   ){
 
   // initialized variables to be shown on screen
   $scope.currentNavItem = window.location.pathname.split('/')[1];
-  $scope.titleArray = [];
-  // $scope.assignments = [];
-  $scope.assignment_due_dates = [];
-  $scope.assignment_start_dates = [];
-  $scope.assignment_types = [];
-  $scope.last_deleted_assignment = {};
-  $scope.selected_type = 'all';
-  $scope.selected_completion = 'all';
-  $scope.search_input = '';
-  // selected array values
-  $scope.selected_activity_id = $scope.$parent.selected_activity_id;
+  $scope.titleArray     = [];
 
+  // $scope.assignments = [];
+  $scope.assignment_due_dates    = [];
+  $scope.assignment_start_dates  = [];
+  $scope.assignment_types        = [];
+  $scope.last_deleted_assignment = {};
+  $scope.selected_type           = 'all';
+  $scope.selected_completion     = 'all';
+  $scope.search_input            = '';
+  // selected array values
+  // $scope.selected_activity_id = $scope.$parent.selected_activity_id;
   //Receive selected_activity_id from activitiesController
+
   $scope.$watch('$parent.selected_activity_id', function(newValue, oldValue) {
-    $scope.selected_activity_id = newValue;
     $scope.getAssignmentList();
-    $scope.currentNavItem = 'classes'
+    if(newValue !== oldValue) {
+      $location.path('classes').replace();
+      $scope.selected_activity_id = newValue;
+      $scope.currentNavItem = 'classes';
+    }
   });
 
   // Assignment Controls
   $scope.getAssignmentList = function(){
-    $scope.assignment_types     = [];
-    $scope.assignment_due_dates = [];
+    $scope.assignment_types       = [];
+    $scope.assignment_due_dates   = [];
     $scope.assignment_start_dates = [];
     $http({
       method : 'GET',

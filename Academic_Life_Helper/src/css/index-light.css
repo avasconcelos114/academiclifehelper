@@ -257,8 +257,6 @@ body {
   text-indent: 10px;
   margin: 0;
   border-radius: 4px;
-  position: relative;
-  right: 5px;
 }
 .task-input:focus{
   background-color: #eee;
@@ -266,7 +264,7 @@ body {
 
 /* External Libraries */
 .md-button {
-  color : currentColor;
+  /*color: #fff;*/
   /*border: 1px solid  #536d84;*/
 }
 ._md-nav-bar-list li a span:hover {
@@ -296,6 +294,13 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 }
 .md-toolbar-tools .md-button:hover, .md-toolbar-tools .md-button.md-icon-button md-icon:hover {
   color: #ff4081;
+}
+.right-panel-button {
+  color: #fff !important;
+}
+.right-panel-button:hover {
+  background: #fff !important;
+  color: #536d84 !important;
 }
 calendar-md .md-toolbar-tools h2 {
   color: #000;

@@ -34,9 +34,9 @@
     <script type="text/javascript">
     //<![CDATA[
 
-    if (screen.width <= 699 || navigator.userAgent.match("iPad")) {
-      window.location.pathname = "/classesMobile";
-    }
+    // if (screen.width <= 699 || navigator.userAgent.match("iPad")) {
+    //   window.location.pathname = "/classesMobile";
+    // }
 
     //]]>
     </script>
@@ -110,11 +110,11 @@
               <md-button style="position: fixed; right: 5px; top: 5px;" hide-gt-sm ng-click="toggleLeft()" class="md-fab" aria-label="Comment">
                 <img width="35px" src="src/img/ic_reorder_white_24dp_2x.png" />
               </md-button>
-              <md-nav-bar md-selected-nav-item="currentNavItem">
-                <md-nav-item md-nav-href="classes" name="classes">
+              <md-nav-bar aria-label="navBar" md-selected-nav-item="currentNavItem">
+                <md-nav-item md-nav-href="classes" onclick="goto('classes')" id="classes" name="classes">
                   Assignments
                 </md-nav-item>
-                <md-nav-item md-nav-href="calendar" name="calendar">Calendar</md-nav-item>
+                <md-nav-item md-nav-href="calendar" id="calendar" onclick="goto('calendar')" name="calendar">Calendar</md-nav-item>
                 <!--<md-nav-item md-nav-href="dashboard" name="dashboard">Dashboard</md-nav-item> -->
               </md-nav-bar>
 

@@ -256,8 +256,6 @@ body {
   text-indent: 10px;
   margin: 0;
   border-radius: 4px;
-  position: relative;
-  right: 5px;
 }
 .task-input::-webkit-input-placeholder {
   color: #fff
@@ -317,6 +315,13 @@ md-menu-item > .md-button:hover {
 }
 .md-toolbar-tools .md-button:hover, .md-toolbar-tools .md-button.md-icon-button md-icon:hover {
   color: #009eb7;
+}
+.right-panel-button {
+  color: #fff !important;
+}
+.right-panel-button:hover {
+  background: #fff !important;
+  color: #536d84 !important;
 }
 calendar-md .md-toolbar-tools h2 {
   color: #fff;

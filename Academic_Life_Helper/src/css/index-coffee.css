@@ -109,14 +109,14 @@ body {
   background: #888078 !important;
 }
 .greeting-msg {
-  color: #d2a17c;
+  color: #f5b98c;
   border-bottom: 1px solid #94887e;
   height: 45px;
 }
 .input-msg {
   font-size: 25px;
   font-weight: bold;
-  color: #d2a17c;
+  color: #f5b98c;
 }
 .left-panel {
   background: #888078;
@@ -171,21 +171,21 @@ body {
   padding: 10px;
   font-size: 18px;
   background: none !important;
-  color: #d2a17c;
+  color: #f5b98c;
   border-radius: 2px;
   border-left: 1px solid #888078;
   border-top: 1px solid #888078;
   border-right: 1px solid #888078;
-  border-bottom: 1px solid #d2a17c;
+  border-bottom: 1px solid #f5b98c;
 }
 .property-title-input:focus {
-  border: 1px solid #d2a17c !important;
+  border: 1px solid #f5b98c !important;
   outline: none;
 }
 .repeat-alarm {
   font-weight: bold;
   font-size: 16px;
-  color: #d2a17c;
+  color: #f5b98c;
 }
 .right-panel {
   width: calc(100% - 350px);
@@ -214,7 +214,7 @@ body {
   cursor: default;
 }
 .right-panel-field-container textarea:focus {
-  border: 2px solid #d2a17c;
+  border: 2px solid #f5b98c;
 }
 .search_button {
   width: 80px;
@@ -232,7 +232,7 @@ body {
   border: 1px solid #c7c7c7;
 }
 .selected-item {
-  color: #d1a17c;
+  color: #f5b98c;
   font-weight: bold;
   background-color: #928a83;
 }
@@ -252,8 +252,6 @@ body {
   text-indent: 10px;
   margin: 0;
   border-radius: 4px;
-  position: relative;
-  right: 5px;
 }
 .task-input:focus{
   background-color: #eee;
@@ -269,7 +267,7 @@ body {
 }
 .md-button:not([disabled]):hover {
   background-color: #888078;
-  color: #fff !important;
+  color: #fff;
 }
 .md-button[disabled] {
   color : rgba(0, 0, 0, 0.26);
@@ -291,6 +289,13 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 }
 .md-toolbar-tools .md-button:hover, .md-toolbar-tools .md-button.md-icon-button md-icon:hover {
   color: #888078;
+}
+.right-panel-button {
+  color: #fff !important;
+}
+.right-panel-button:hover {
+  background: #fff !important;
+  color: #888078 !important;
 }
 calendar-md .md-toolbar-tools h2 {
   color: #000;

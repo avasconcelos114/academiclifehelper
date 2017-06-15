@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^2.4.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.4.3",
     "express": "^4.13.4",
     "method-override": "^2.1.3",

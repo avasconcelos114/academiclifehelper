@@ -38,9 +38,9 @@ app.controller('activitiesController',
   };
 
   $scope.selectActivity = function(activity_id) {
-    $scope.selected_activity_id = activity_id;
     $cookies.put('selected_activity_id', activity_id);
-    $location.path('classes');
+    $scope.selected_activity_id = activity_id;
+    // $location.path('classes');
 
   };
 
@@ -128,7 +128,7 @@ app.controller('activitiesController',
 
                 $scope.closeDialog()
                 $scope.removeAssignmentFromActivity(activity_id)
-                $scope.selected_activity_id = -1;
+                $cookies.remove('selected_activity_id')
                 window.location.reload()
                 // Uncomment below for testing
                 // console.log(success)
