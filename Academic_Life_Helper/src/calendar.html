@@ -1,10 +1,11 @@
-<calendar-md flex layout layout-fill
+<div ng-controller="calendarController">
+  <calendar-md flex layout layout-fill
   calendar-direction="horizontal"
   on-prev-month="prevMonth"
   on-next-month="nextMonth"
   on-day-click="dayClick"
   title-format="'MMMM y'"
-  ng-model='assignment_due_dates'
+  ng-model='selectedDate'
   week-starts-on="firstDayOfWeek"
   tooltips="true"
   day-format="dayFormat"
@@ -15,3 +16,4 @@
   disable-future-selection="false"
   class="ng-pristine ng-untouched ng-valid layout-fill ng-isolate-scope layout-row flex"
   ></calendar-md>
+</div>
