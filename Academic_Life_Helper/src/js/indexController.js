@@ -186,7 +186,17 @@ app.controller('indexController', [
       });
     };
   });
+  app.config(function($mdThemingProvider) {
 
+      // Configure a dark theme with primary foreground yellow
+
+      $mdThemingProvider.theme('docs-dark', 'default')
+        .accentPalette('yellow')
+        .primaryPalette('blue')
+        .warnPalette('yellow')
+        .dark();
+
+    });
   app.directive('noSpaceValidation', function() {
       return {
           restrict: 'A',

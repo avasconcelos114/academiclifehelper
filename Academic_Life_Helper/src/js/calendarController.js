@@ -75,7 +75,7 @@ app.controller('calendarController',
 
       $scope.dayClick = function(date) {
         $scope.selectedDate = $filter("date")(date, "yyyy-MM-dd");
-
+        
         if($scope.titleArray[$scope.titleArray.findIndex(x => x.date === $scope.selectedDate)].titleList.length > 0)
           showDialog();
       };

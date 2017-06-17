@@ -47,11 +47,13 @@ app.controller('assignmentsController',
       $scope.selected_activity_id = newValue;
       // $scope.currentNavItem = 'classes';
     }
+    $scope.assignments = [];
     $scope.getAssignmentList();
   });
 
   // Assignment Controls
   $scope.getAssignmentList = function(){
+    $scope.assignments            = [];
     $scope.assignment_types       = [];
     $scope.assignment_due_dates   = [];
     $scope.assignment_start_dates = [];
@@ -61,7 +63,6 @@ app.controller('assignmentsController',
     })
     .then(
       function(success){
-        $scope.assignments = [];
         $scope.assignments = success.data
         // create date array for datepicker & types
         for(i = 0; i <= success.data.length - 1; i++) {
@@ -73,8 +74,6 @@ app.controller('assignmentsController',
           $scope.assignment_due_dates.push(due_date_object)
           $scope.assignment_types.push(type_object)
         }
-
-        console.log('FIRST ##############################')
       },
       function(error){
         // Uncomment below for testing
@@ -152,18 +151,21 @@ app.controller('assignmentsController',
   }
 
   $scope.setCompletedYn = function(assignment_id, value){
+    var changedValue = value === 'N' ? 'Y' : 'N';
     $http({
       method : 'PUT',
       url    : '/api/assignment/status/' + assignment_id,
-      data   : { completedYn : value === 'N' ? 'Y' : 'N' }
+      data   : { completedYn : changedValue }
     })
     .then(function (success) {
-      $scope.getAssignmentList()
+      // Change front-end styles without calling $scope.getAssignmentList
+      $scope.assignments[$scope.findIndexById('assignment', assignment_id)].completedYn = changedValue
+
       // Uncomment below for testing
-      // handleOnClick(success)
+      // console.log(success)
     }, function (error) {
       // Uncomment below for testing
-      // handleOnClick(error)
+      // console.log(error)
     });
   }
 
