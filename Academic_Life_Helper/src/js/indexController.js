@@ -17,9 +17,10 @@ app.controller('indexController', [
   ){
 
   // general variables
-  $scope.selected_tab = 0;
   $scope.warning_message = '';
-  $scope.isShowPreferences = false;
+  $scope.warning_title = '';
+  $scope.is_show_register = false;
+  $scope.is_show_login = true;
   // routes setup
   $scope.$route = $route;
   $scope.$location = $location;
@@ -52,6 +53,7 @@ app.controller('indexController', [
         })
         .then(function(success) {
           if(success.data.status === 'EXISTING_USERNAME') {
+            $scope.warning_title = 'Warning!';
             $scope.warning_message = 'Username already exists.';
             showDialog();
           } else if(success.data.status === 'SUCCESS'){
@@ -61,16 +63,16 @@ app.controller('indexController', [
               data   : { username : $scope.username_input, password : $scope.password_input }
             })
             .then(function(success) {
+              $scope.warning_title = 'Congratulations!';
               $scope.warning_message = 'Successfully Registered New User!';
               showDialog();
               //reset input fields and switch to login tab
-              $scope.username_input = "";
-              $scope.password_input = "";
-              $scope.password_input_confirm = "";
-              $scope.selected_tab = 0;
+              document.getElementById('registrationForm').reset()
+              if(window.location.path = 'registerMobile') $scope.toggleLoginView();
               // Uncomment below for testing
               // console.log(success)
             }, function(error) {
+              $scope.warning_title = 'Warning!';
               $scope.warning_message = 'Failed to Register New User.';
               showDialog();
               // Uncomment below for testing
@@ -81,6 +83,7 @@ app.controller('indexController', [
             console.log(error)
         });
       } else {
+        $scope.warning_title = 'Warning!';
         $scope.warning_message = 'Please verify that both passwords have the same value!';
         showDialog();
         return;
@@ -99,12 +102,14 @@ app.controller('indexController', [
         // Uncomment below for testing
         // console.log(success)
         if(success.data.status === 'USERNAME_NOT_FOUND') {
+          $scope.warning_title = 'Warning!';
           $scope.warning_message = 'Please confirm that the username is spelled correctly.';
           showDialog();
           return;
         }
 
         if(success.data.status === 'INCORRECT_PASSWORD') {
+          $scope.warning_title = 'Warning!';
           $scope.warning_message = 'Please confirm that you wrote your password correctly.';
           showDialog();
           return;
@@ -117,6 +122,7 @@ app.controller('indexController', [
         // console.log(error)
       });
     } else {
+      $scope.warning_title = 'Warning!';
       $scope.warning_message = 'Please input username and password';
       showDialog();
     }
@@ -126,14 +132,6 @@ app.controller('indexController', [
     $cookies.remove('user');
     $cookies.remove('selected_activity_id');
     window.location = '/';
-  }
-  // preference toggle
-  $scope.showPreferences = function() {
-    $scope.isShowPreferences = true;
-  }
-
-  $scope.hidePreferences = function() {
-    $scope.isShowPreferences = false;
   }
 
   // dialog template
@@ -147,7 +145,7 @@ app.controller('indexController', [
          '<md-dialog aria-label="List dialog">' +
          '<md-toolbar class="dialog-header">' +
            '<div class="md-toolbar-tools">' +
-             '<h2>Warning!</h2>' +
+             '<h2>' + $scope.warning_title + '</h2>' +
              '<span flex></span>' +
            '</div>' +
          '</md-toolbar>' +
@@ -173,6 +171,15 @@ app.controller('indexController', [
       }
     }
   }
+
+  // mobile login controls
+  $scope.toggleLoginView = function() {
+    document.getElementById('registrationForm').reset()
+
+    $scope.is_show_login = !$scope.is_show_login
+    $scope.is_show_register = !$scope.is_show_register
+  }
+
 }]).directive('ngEnter', function() {
     return function(scope, elem, attrs) {
       elem.bind("keydown keypress", function(event) {

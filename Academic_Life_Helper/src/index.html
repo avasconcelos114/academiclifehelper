@@ -34,16 +34,16 @@
     <script type="text/javascript">
     //<![CDATA[
 
-    // if (screen.width <= 699 || navigator.userAgent.match("iPad")) {
-    //   window.location.pathname = "/classesMobile";
-    // }
+    if (screen.width <= 699 || navigator.userAgent.match("iPad")) {
+      window.location.pathname = "/classesMobile";
+    }
 
     //]]>
     </script>
 
   </head>
   <body >
-    <div ng-controller="activitiesController" style="overflow: hidden">
+    <div ng-controller="activitiesController">
       <div class="max-height" layout="row">
 
         <md-sidenav
@@ -52,7 +52,7 @@
         md-is-locked-open="$mdMedia('gt-sm')"
         md-whiteframe="4">
 
-          <md-toolbar class="md-theme-indigo navbar-custom">
+          <md-toolbar style="min-height: 120px;" class="md-theme-indigo navbar-custom">
             <md-menu md-offset="30 30">
               <div class="settings-button" ng-click="$mdMenu.open()"></div>
 
@@ -78,10 +78,9 @@
             </div>
           </md-toolbar>
 
-          <md-content layout-padding>
-            <div>
+          <md-content style="min-height: 400px" layout-padding>
               <ul class="activity-list-area">
-                <li style="cursor: pointer" ng-class="selected_activity_id === activity._id ? 'activity-list-item selected-item' : 'activity-list-item'" ng-click="selectActivity(activity._id)" ng-repeat="activity in activities">
+                <li title="Click to select activity" style="cursor: pointer" ng-class="selected_activity_id === activity._id ? 'activity-list-item selected-item' : 'activity-list-item'" ng-click="selectActivity(activity._id)" ng-repeat="activity in activities">
                   <div ng-class="selected_activity_id === activity._id ? 'activity-list-icon-selected' : 'activity-list-icon'"></div>
                   <span>{{ activity.title }}</span>
                   <div ng-click="removeActivityDialog(activity._id)" class="delete-activity"></div>
@@ -100,11 +99,10 @@
                 />
               </div>
               <p class="repeat-alarm" ng-show="!activityInput.$valid">Input content too long!</p>
-            </div>
           </md-content>
         </md-sidenav>
 
-          <div ng-controller="assignmentsController" flex-sm="100" flex-xs="100" class="max-height right-panel">
+          <div ng-controller="assignmentsController" style="overflow-y: hidden" flex-sm="100" flex-xs="100" class="max-height right-panel">
 
             <div ng-if="!isShowPreferences">
               <md-button style="position: fixed; right: 5px; top: 5px;" hide-gt-sm ng-click="toggleLeft()" class="md-fab" aria-label="Comment">

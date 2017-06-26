@@ -9,7 +9,9 @@
 html, body {
   font-family: 'Source Sans Pro', Roboto !important;
 }
-
+h2 {
+  font-size: 8rem !important;
+}
 .activity-icon {
   background: url("../img/mobile-activity-light.png") no-repeat 50% 50%;
   background-size: 70px 70px;
@@ -29,6 +31,7 @@ html, body {
   border-bottom: 1px solid #696969;
   vertical-align: middle;
   text-align: center;
+  z-index: 100;
 }
 .activity-header .userName {
   display: inline-block;
@@ -155,6 +158,20 @@ html, body {
   text-indent: -200px;
   position: relative;
 }
+.register-button {
+  height: 14rem !important;
+  font-size: 4.5rem !important;
+}
+.register-toggler {
+  display: table-cell;
+  width: 100%;
+  text-align: center;
+  font-size: 5rem;
+  height: 100%;
+  padding-bottom: 20px;
+  color: #4a6175;
+  text-decoration: underline;
+}
 .row-height {
   display: table;
   table-layout: fixed;
@@ -214,10 +231,22 @@ html, body {
   bottom: 0px;
   width: 100%;
   display: table;
+  z-index: 100;
+  background: #fff;
 }
 .assignment-icon {
   background: url("../img/mobile-task-light.png") no-repeat 50% 50%;
 }
 .assignment-icon-selected {
   background: url("../img/mobile-task-selected.png") no-repeat 50% 50%;
+}
+
+md-input-container {
+  font-size: 4rem;
+}
+md-input-container .md-input {
+  height: 7rem !important;
+}
+md-input-container label:not(.md-container-ignore).md-required:after {
+  font-size: 3rem;
 }

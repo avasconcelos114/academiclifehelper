@@ -36,7 +36,7 @@
   </head>
   <body ng-controller="activitiesMobileController">
     <div class="activity-header">
-      <span class="userName">Andre Vasconcelos</span><br/>
+      <span class="userName">{{ logged_username }}</span><br/>
       <span class="activityName" ng-show="is_show_assignment">{{ activities[findIndexById('activity', selected_activity_id)].title }}</span>
     </div>
 
@@ -48,7 +48,7 @@
             class="list-item"
             ng-repeat="activity in activities"
           >
-            <div ng-click="removeActivity(activity)" class="delete-area">
+            <div ng-click="removeActivity(activity._id)" class="delete-area">
               Delete
             </div>
             <span

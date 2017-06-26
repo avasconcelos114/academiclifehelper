@@ -28,9 +28,9 @@
         <div ng-show="selected_activity_id !== -1">
           <ul class="list-area">
             <li  ng-class="assignment.completedYn === 'Y' ? 'list-item completed' : 'list-item'" ng-repeat="assignment in assignments | filter: filterType( 'type', selected_type) | filter : filterCompletion( 'completedYn', selected_completion)">
-              <span ng-click="openRight(assignment)" style="width: calc(100% - 390px); overflow: hidden; text-overflow: ellipsis; display: inline-block; white-space: nowrap; outline: none">{{ assignment.title }}</span>
-              <div ng-click="removeAssignment(assignment._id)" class="delete-activity"></div>
-              <div ng-click="setCompletedYn(assignment._id, assignment.completedYn)" ng-class="assignment.completedYn === 'Y' ? 'complete-activity-checked' : 'complete-activity'"></div>
+              <span title="Click to edit" ng-click="openRight(assignment)" style="width: calc(100% - 390px); overflow: hidden; text-overflow: ellipsis; display: inline-block; white-space: nowrap; outline: none">{{ assignment.title }}</span>
+              <div title="Click to delete" ng-click="removeAssignment(assignment._id)" class="delete-activity"></div>
+              <div title="Click to complete assignment" ng-click="setCompletedYn(assignment._id, assignment.completedYn)" ng-class="assignment.completedYn === 'Y' ? 'complete-activity-checked' : 'complete-activity'"></div>
               <div ng-class="checkDateStatus(assignment)">
                 <md-datepicker
                   ng-change="setAssignmentDate(assignment._id, $index)"

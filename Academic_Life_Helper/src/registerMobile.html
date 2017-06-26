@@ -1,0 +1,125 @@
+<html ng-app="app" ng-controller="indexController">
+  <head>
+    <title>Academic Life Helper</title>
+    <meta charset="utf-8" />
+    <!-- Web fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" ng-href="../bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" ng-href="src/css/mobile.css">
+    <link rel="stylesheet" ng-href="src/css/fixed-style.css">
+    <link rel="stylesheet" ng-href="src/css/bootstrap.css">
+    <!-- Imports
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    -->
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="../bower_components/angular-material/angular-material.min.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/material-calendar/angular-material-calendar.min.js"></script>
+    <script src="src/js/app.module.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="src/js/app.module.js"></script>
+
+    <!-- Controllers -->
+    <script src="src/js/indexController.js"></script>
+
+  </head>
+  <body>
+    <div class="activity-header">
+      <span class="userName">Academic Life Helper</span><br/>
+    </div>
+
+    <div ng-show="is_show_register" style="height: calc(100% - 300px); top: 150px;" class="registration_form_container">
+      <h2 style="margin-bottom: 100px">Create New Account</h2>
+
+      <form style="margin-top: 20px" name="registrationForm" id="registrationForm" ng-submit="registerUser()">
+        <div style="margin: 50px 0" layout="row">
+          <md-input-container flex="100">
+            <label>Username</label>
+            <input no-special-char no-space-validation required name="username" minlength="4" maxlength="15" ng-model="username_input">
+            <div ng-messages="registrationForm.username.$error">
+              <div style="height: 3rem; font-size: 3rem" ng-message="required">This is a required field.</div>
+              <div style="height: 3rem; font-size: 3rem" ng-message-exp="['minlength', 'maxlength']">Please input a username between 4 and 15 characters long.</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div style="margin: 50px 0" layout="row">
+          <md-input-container flex="100">
+            <label>Password</label>
+            <input required no-space-validation name="password" type="password" minlength="4" maxlength="12" ng-model="password_input">
+            <div ng-messages="registrationForm.password.$error">
+              <div style="height: 3rem; font-size: 3rem" ng-message="required">This is a required field.</div>
+              <div style="height: 3rem; font-size: 3rem" ng-message-exp="['minlength', 'maxlength']">Please input a password between 4 and 12 characters long.</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div style="margin: 50px 0" layout="row">
+          <md-input-container flex="100">
+            <label>Confirm Password</label>
+            <input required no-space-validation name="password_confirm" type="password" minlength="4" maxlength="12" ng-model="password_input_confirm">
+            <div ng-messages="registrationForm.password_confirm.$error">
+              <div style="height: 3rem; font-size: 3rem" ng-message="required">This is a required field.</div>
+              <div style="height: 3rem; font-size: 3rem" ng-message-exp="['minlength', 'maxlength']">Please input a password between 4 and 12 characters long.</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div style="position: relative; top: 66px">
+          <md-button class="register-button" type="submit">Sign Up</md-button>
+        </div>
+      </form>
+    </div>
+
+    <div ng-show="is_show_login" style="height: calc(100% - 300px); top: 150px;" class="registration_form_container">
+      <h2 style="margin-bottom: 100px">Log in</h2>
+
+      <form style="margin-top: 20px" name="loginForm" ng-submit="loginUser()">
+        <div style="margin: 50px 0" layout="row">
+          <md-input-container flex="100">
+            <label>Username</label>
+            <input no-special-char no-space-validation required name="username" minlength="4" maxlength="15" ng-model="login_username_input">
+            <div ng-messages="loginForm.username.$error">
+              <div style="height: 3rem; font-size: 3rem" ng-message="required">This is a required field.</div>
+              <div style="height: 3rem; font-size: 3rem" ng-message-exp="['minlength', 'maxlength']">Please input a username between 4 and 15 characters long.</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div style="margin: 50px 0" layout="row">
+          <md-input-container flex="100">
+            <label>Password</label>
+            <input required no-space-validation name="password" type="password" minlength="4" maxlength="12" ng-model="login_password_input">
+            <div ng-messages="loginForm.password.$error">
+              <div style="height: 3rem; font-size: 3rem" ng-message="required">This is a required field.</div>
+              <div style="height: 3rem; font-size: 3rem" ng-message-exp="['minlength', 'maxlength']">Please input a password between 4 and 12 characters long.</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div style="position: relative; top: 66px">
+          <md-button class="register-button" type="submit">Log In</md-button>
+        </div>
+      </form>
+    </div>
+
+    <div class="selector-container">
+      <p class="register-toggler" ng-click="toggleLoginView()">
+        {{
+          is_show_register ? 'Cancel' : 'Register'
+        }}
+      </p>
+    </div>
+
+  </body>
+</html>

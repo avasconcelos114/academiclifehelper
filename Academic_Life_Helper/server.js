@@ -326,3 +326,6 @@
     app.get('/classesMobile', function(req, res) {
         res.sendFile('./src/mobile.html', {root: __dirname});
     });
+    app.get('/registerMobile', function(req, res) {
+        res.sendFile('./src/registerMobile.html', {root: __dirname});
+    });

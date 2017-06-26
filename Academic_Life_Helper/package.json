@@ -9,6 +9,9 @@
     "url": "https://magistrall@bitbucket.org/magistrall/alh.git"
   },
   "license": "MIT",
+  "devDependencies": {
+    "react-scripts": "0.7.0"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.4.3",
@@ -17,5 +20,9 @@
     "mongoose": "^4.4.12",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "^1.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   }
 }

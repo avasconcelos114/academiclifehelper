@@ -30,22 +30,23 @@
     <script type="text/javascript">
     //<![CDATA[
 
-    // if (screen.width <= 699 || navigator.userAgent.match("iPad")) {
-    //   document.location = "/src/mobile.html";
-    // }
+    if (screen.width <= 699 || navigator.userAgent.match("iPad")) {
+      document.location = "/registerMobile";
+    }
 
     //]]>
     </script>
 
   </head>
-  <body >
+  <body>
     <div flex="100" class="login_header">
-      <div style="float: left; display: inline-block">
-        <img src="src/img/Logo-white2.png" style="margin: 17px 0px 0px 20px; height: 45px" />
+
+      <div flex-xs="0" flex-sm="10" flex-gt-sm="10" style="float: left; display: inline-block; background: url(src/img/Logo-white2.png) no-repeat 50% 50%; height: 120px; width: inherit;background-size: 50px;">
       </div>
-      <div class="login_form_container">
+
+      <div flex-xs="100" flex-sm="90" flex-gt-sm="90" class="login_form_container">
         <form name="loginForm" layout="row" md-theme="docs-dark" ng-submit="loginUser()">
-          <div flex="40">
+          <div style="width: 200px">
             <md-input-container>
               <label>Username</label>
               <input no-special-char no-space-validation md-autofocus required name="username" minlength="4" maxlength="15" ng-model="login_username_input">
@@ -56,7 +57,7 @@
             </md-input-container>
           </div>
 
-          <div flex="40">
+          <div style="width: 200px">
             <md-input-container>
               <label>Password</label>
               <input required no-space-validation name="password" type="password" minlength="4" maxlength="12" ng-model="login_password_input">
@@ -67,22 +68,28 @@
             </md-input-container>
           </div>
 
-          <div flex="20">
+          <div style="width: 100px; padding: 0 20px">
             <md-button class="register-button" type="submit">Sign In</md-button>
           </div>
 
         </form>
       </div>
     </div>
-    <div class="max-height" layout="row">
+    <div class="max-height" style="min-height: 800px" layout="row">
+
       <div flex-gt-md="70" flex-md="0" flex-sm="0" flex-xs="0" style="overflow-y: hidden;">
         <img style="width: 100%; height: auto; margin-top: 70px;" src="src/img/login_background.png" />
       </div>
-      <div flex-gt-md="30" flex-md="100" flex-sm="100" flex-xs="100">
-        <h2 style="position: relative; top: 200px; text-indent: 45px">Create New Account</h2>
-        <div class="registration_form_container">
-          <form style="margin-top: 20px" name="registrationForm" ng-submit="registerUser()">
 
+      <div flex-gt-md="0" flex-md="50" flex-sm="40" flex-xs="0">
+
+      </div>
+
+      <div flex-gt-md="30" flex-md="50" flex-sm="60" flex-xs="100">
+        <div class="registration_form_container">
+          <h2>Create New Account</h2>
+
+          <form style="margin-top: 20px" name="registrationForm" id="registrationForm" ng-submit="registerUser()">
             <div layout="row">
               <md-input-container flex="100">
                 <label>Username</label>
@@ -115,13 +122,14 @@
                 </div>
               </md-input-container>
             </div>
+
             <div style="position: relative; top: 66px">
               <md-button class="register-button" type="submit">Sign Up</md-button>
             </div>
+
           </form>
         </div>
       </div>
     </div>
-
   </body>
 </html>

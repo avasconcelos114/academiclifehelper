@@ -2,11 +2,16 @@ html, body {
   font-family: 'Source Sans Pro', Roboto, Noto !important;
 }
 .activity-list-area {
-  max-height: calc(100% - 140px);
+  height: calc(100% - 200px);
+  min-height: 300px;
   overflow-y: auto;
   padding-left: 0px;
   overflow-x: hidden;
   padding-bottom: 10px;
+}
+.body-container {
+  min-width: 880px;
+  overflow: auto;
 }
 .max-height {
   height: 100%;
@@ -103,10 +108,10 @@ html, body {
   width:      -o-calc(100% - 400px);
 }
 .list-area {
-  max-height:    -moz-calc(100% - 110px);
-  max-height: -webkit-calc(100% - 110px);
-  max-height:      -o-calc(100% - 110px);
-  max-height:         calc(100% - 110px);
+  max-height:    -moz-calc(100% - 162px);
+  max-height: -webkit-calc(100% - 162px);
+  max-height:      -o-calc(100% - 162px);
+  max-height:         calc(100% - 162px);
   overflow-y: auto;
   padding-bottom: 10px;
   padding-left: 0px;
@@ -116,16 +121,16 @@ html, body {
 }
 .login_form_container {
   float: right;
-  margin-top: 5px;
-  width: 600px;
+  margin-top: 25px;
+  /*width: 850px;*/
   padding-right: 50px
 }
 .login_header {
   position: absolute;
   top: 0;
   width: 100%;
-  min-width: 800px;
-  height: 80px;
+  min-width: 600px;
+  height: 120px;
   background: #4a6175;
 }
 .login_panel {
@@ -149,6 +154,7 @@ html, body {
   position: relative;
   padding: 50px;
   height: 500px;
+  /*min-width: 600px;*/
   top: calc(50% - 250px);
 }
 .right-panel-bottom {
