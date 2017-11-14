@@ -1,29 +1,21 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This is the repository for Andre's practice application with a MEAN application (First attempt)
 
-### What is this repository for? ###
+I would like to heavily emphasize the word _practice_.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Required Installations ###
+* NodeJS
+* MongoDB
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+> git clone https://github.com/avasconcelos114/academiclifehelper.git
+> cd academiclifehelper/Academic_Life_Helper/
+> Edit server.js to add in :
+ * your mongo DB server info on `var MongoDB = 'mongodb://yourusername@127.0.0.1:27017/admin'`
+> npm install
+> node server.js
 
-### Contribution guidelines ###
+Server should start on port 1337
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
