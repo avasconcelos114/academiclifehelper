@@ -1,6 +1,14 @@
-var app = angular.module('app', [ 'ngAnimate', 'ngAria', 'ngCookies', 'ngMaterial', 'ngMessages', 'materialCalendar', 'ngSanitize', 'ngRoute'] )
-
-app.config(function($routeProvider, $locationProvider) {
+angular
+.module('app', [ 
+    'ngAnimate', 
+    'ngAria', 
+    'ngCookies', 
+    'ngMaterial', 
+    'ngMessages', 
+    'materialCalendar', 
+    'ngSanitize', 
+    'ngRoute'])
+.config(function($routeProvider, $locationProvider) {
     $routeProvider
     .when("/classes", {
         templateUrl : "/src/assignments.html",
@@ -15,7 +23,6 @@ app.config(function($routeProvider, $locationProvider) {
         controller: 'assignmentsController'
     })
 
-    // configure html5 to get links working on jsfiddle
       $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
