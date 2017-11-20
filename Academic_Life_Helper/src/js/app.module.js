@@ -8,7 +8,7 @@ angular
     'materialCalendar', 
     'ngSanitize', 
     'ngRoute'])
-.config(function($routeProvider, $locationProvider) {
+.config(function($routeProvider, $locationProvider, $mdThemingProvider) {
     $routeProvider
     .when("/classes", {
         templateUrl : "/src/assignments.html",
@@ -23,13 +23,10 @@ angular
         controller: 'assignmentsController'
     })
 
-      $locationProvider.html5Mode({
+    $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
-      });
-});
-
-angular.module("app").config(function($mdThemingProvider) {
-    $mdThemingProvider
-        .theme("default")
+    });
+    
+    $mdThemingProvider.theme("default")
 });

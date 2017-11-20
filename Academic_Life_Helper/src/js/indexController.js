@@ -4,62 +4,6 @@
     angular
     .module('app')
     .controller('indexController', IndexController)
-    .directive('ngEnter', function() {
-        return function(scope, elem, attrs) {
-          elem.bind("keydown keypress", function(event) {
-            // 13 represents enter button
-            if (event.which === 13) {
-              scope.$apply(function() {
-                scope.$eval(attrs.ngEnter);
-              });
-              event.preventDefault();
-            }
-          });
-        };
-    })
-    .config(function($mdThemingProvider) {
-    
-        // Configure a dark theme with primary foreground yellow
-    
-        $mdThemingProvider.theme('docs-dark', 'default')
-        .accentPalette('yellow')
-        .primaryPalette('blue')
-        .warnPalette('yellow')
-        .dark();
-    
-    })
-    .directive('noSpaceValidation', function() {
-        return {
-            restrict: 'A',
-    
-            link: function($scope, $element) {
-                $element.bind('keydown', function(e) {
-                    if ( e.which === 32  ) {
-                        e.preventDefault();
-                    }
-                });
-            }
-        }
-    })
-    .directive('noSpecialChar', function() {
-        return {
-            require: 'ngModel',
-            restrict: 'A',
-            link: function(scope, element, attrs, modelCtrl) {
-                modelCtrl.$parsers.push(function(inputValue) {
-                if (inputValue == null)
-                    return ''
-                cleanInputValue = inputValue.replace(/[^\w\s]/gi, '');
-                if (cleanInputValue != inputValue) {
-                    modelCtrl.$setViewValue(cleanInputValue);
-                    modelCtrl.$render();
-                }
-                return cleanInputValue;
-                });
-            }
-        } 
-    });
-    
 
     IndexController.$inject = [
         '$scope',
@@ -242,3 +186,59 @@
 
     }
 })();
+
+angular.module('app').directive('ngEnter', function() {
+    return function(scope, elem, attrs) {
+      elem.bind("keydown keypress", function(event) {
+        // 13 represents enter button
+        if (event.which === 13) {
+          scope.$apply(function() {
+            scope.$eval(attrs.ngEnter);
+          });
+          event.preventDefault();
+        }
+      });
+    };
+})
+angular.module('app').config(function($mdThemingProvider) {
+
+    // Configure a dark theme with primary foreground yellow
+
+    $mdThemingProvider.theme('docs-dark', 'default')
+    .accentPalette('yellow')
+    .primaryPalette('blue')
+    .warnPalette('yellow')
+    .dark();
+
+})
+angular.module('app').directive('noSpaceValidation', function() {
+    return {
+        restrict: 'A',
+
+        link: function($scope, $element) {
+            $element.bind('keydown', function(e) {
+                if ( e.which === 32  ) {
+                    e.preventDefault();
+                }
+            });
+        }
+    }
+})
+angular.module('app').directive('noSpecialChar', function() {
+    return {
+        require: 'ngModel',
+        restrict: 'A',
+        link: function(scope, element, attrs, modelCtrl) {
+            modelCtrl.$parsers.push(function(inputValue) {
+            if (inputValue == null)
+                return ''
+            cleanInputValue = inputValue.replace(/[^\w\s]/gi, '');
+            if (cleanInputValue != inputValue) {
+                modelCtrl.$setViewValue(cleanInputValue);
+                modelCtrl.$render();
+            }
+            return cleanInputValue;
+            });
+        }
+    } 
+});
