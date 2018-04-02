@@ -1,22 +1,31 @@
 @import '../common';
 
 .navbar {
-  height: 6.5rem;
+  height: 5em;
   background-color: $primaryColor;
-  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
 
-  .nav-links,
-  .logo {
-    display: inline-block;
+  .nav-links {
+    flex: 1;
+    max-width: 140px;
   }
 
   .logo {
-    color: $lightTextColor;
-    margin-right: 50%;
+    flex: 1;
+    justify-content: flex-start;
   }
-
-  .nav-links span {
+  .logo-placeholder {
+    background: white;
+    height: 32px;
+    width: 32px;
+    margin: 0.9em;
+  }
+  .nav-links span a{
     color: $lightTextColor;
-    font-size: 1.6rem;
+    font-size: 1rem;
+    text-decoration: none;
+    line-height: 3em;
+    padding-left: 1em;
   }
 }
