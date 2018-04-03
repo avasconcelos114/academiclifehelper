@@ -8,7 +8,7 @@
 
   .nav-links {
     flex: 1;
-    max-width: 140px;
+    max-width: 8em;
   }
 
   .logo {
@@ -21,11 +21,11 @@
     width: 32px;
     margin: 0.9em;
   }
-  .nav-links span a{
+  .nav-links span a {
     color: $lightTextColor;
-    font-size: 1rem;
+    font-size: 1.4rem;
     text-decoration: none;
-    line-height: 3em;
-    padding-left: 1em;
+    line-height: 3.5em;
+    padding-left: 0.6em;
   }
 }
