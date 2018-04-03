@@ -1,5 +1,6 @@
 # Academic Life Helper
-This application is meant to be a slightly fancier 
+This application is meant to provide an easier way for students to keep focus on what's important,  
+allowing them to view their most immediate activities, assignments, or exams.
 ___
 
 ## File Structure
@@ -19,6 +20,7 @@ client
 ⋅⋅⋅⋅⋅⋅⋅⋅home.html * home template
 ⋅⋅⋅⋅⋅⋅⋅⋅home.spec.js * home specs (for entry, component, and controller)
 ```
+
 # Getting Started
 ## Dependencies
 Tools needed to run this app:
@@ -41,12 +43,6 @@ Here's a list of available tasks:
   * runs `serve`.
 * `npm run component`
   * scaffolds a new Angular component. [Read below](#generating-components) for usage details.
-  
-### Examples
-
-It's always easier to learn something if you have an examples. Here is a list of repos which based on this starter:
-
- - [TodoMVC Example App](https://github.com/AngularClass/NG6-todomvc-starter)
 
 ### Generating Components
 Following a consistent directory structure between components offers us the certainty of predictability. We can take advantage of this certainty by creating a gulp task to automate the "instantiation" of our components. The component boilerplate task generates this:
@@ -74,6 +70,4 @@ Running `npm run component -- --name footer --parent ../common` creates a `foote
 Because the argument to `--name` applies to the folder name **and** the actual component name, make sure to camelcase the component names.
 
 **Credits** 
-
-<br><br>
-* Project template acquired from https://github.com/gdi2290/NG6-starter
+Project template acquired from https://github.com/gdi2290/NG6-starter
