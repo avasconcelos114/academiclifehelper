@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Lato);
 
 $primaryColor:   #7799b7;
 $accentColor:    #ff005c;
@@ -13,7 +13,8 @@ html {
    // browsers default to 16px for font-size,
    // so setting top-level font-size to 62.5%
    // scales 1rem to equal 10px.
-   font: 62.5% 'Roboto', sans-serif;
+   font-size: 62.5%;
+   font-family: 'Lato', sans-serif !important;
 }
 
 body {

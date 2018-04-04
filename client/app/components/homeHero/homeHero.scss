@@ -1,0 +1,44 @@
+@import "../../common/common";
+@import url(https://fonts.googleapis.com/css?family=Raleway|Playfair+Display);
+
+.main-background {
+  background: url(/static/images/home_carrousel_1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+}
+
+.message-container {
+  margin: 100px 4%;
+  width: calc(40% - ( ( 4% ) * 0.5 ) );
+  height: auto;
+  display: flex;
+  flex-flow: column;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  color: $lightTextColor;
+
+  h3 {
+    font-size: 4.5rem;
+    font-family: 'Playfair Display', 'Lato', serif;
+    margin: 0;
+  }
+
+  p {
+    font-family: 'Raleway', 'Lato', serif;
+    font-size: 1.8rem;
+  }
+
+  button {
+    background-color: $accentColor;
+    display: flex;
+    margin-left: auto;
+    right: 0;
+    font-size: 1.4rem;
+    border: none;
+    padding: 15px 20px;
+    width: 8em;
+  }
+}

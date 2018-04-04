@@ -6,6 +6,7 @@
   "dependencies": {
     "angular": "^1.5.0",
     "angular-ui-router": "^1.0.0-beta.1",
+    "bootstrap-sass": "^3.3.7",
     "normalize.css": "^3.0.3"
   },
   "devDependencies": {
