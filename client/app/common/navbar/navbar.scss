@@ -1,5 +1,5 @@
 @import '../common';
-
+@import url('https://fonts.googleapis.com/css?family=Volkhov');
 .navbar {
   height: 5em;
   background-color: $primaryColor;
@@ -13,14 +13,13 @@
 
   .logo {
     flex: 1;
+    color: $lightTextColor;
+    font-family: 'Volkhov', serif;
+    font-size: 2.4rem;
+    margin: 0.5rem 1rem;
     justify-content: flex-start;
   }
-  .logo-placeholder {
-    background: white;
-    height: 32px;
-    width: 32px;
-    margin: 0.9em;
-  }
+
   .nav-links span a {
     color: $lightTextColor;
     font-size: 1.4rem;

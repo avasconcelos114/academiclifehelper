@@ -1,6 +1,8 @@
 @import "../../common/common";
 @import url(https://fonts.googleapis.com/css?family=Raleway|Playfair+Display);
-
+header {
+  margin-bottom: 50px;
+}
 .main-background {
   background: url(/static/images/home_carrousel_1.jpg);
   background-repeat: no-repeat;
@@ -39,6 +41,10 @@
     font-size: 1.4rem;
     border: none;
     padding: 15px 20px;
-    width: 8em;
+    transition: 600ms;
+  }
+
+  button:hover {
+    background-color: $accentColorHover;
   }
 }
