@@ -1,8 +1,6 @@
 @import "../../common/common";
 @import url(https://fonts.googleapis.com/css?family=Raleway|Playfair+Display);
-header {
-  margin-bottom: 50px;
-}
+
 .main-background {
   background: url(/static/images/home_carrousel_1.jpg);
   background-repeat: no-repeat;
@@ -13,14 +11,11 @@ header {
 }
 
 .message-container {
-  margin: 100px 4%;
-  width: calc(40% - ( ( 4% ) * 0.5 ) );
-  height: auto;
-  display: flex;
-  flex-flow: column;
   background-color: rgba(0, 0, 0, 0.6);
-  padding: 20px;
   color: $lightTextColor;
+  padding: 30px !important;
+  height: fit-content;
+  margin: auto 0;
 
   h3 {
     font-size: 4.5rem;

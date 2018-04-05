@@ -3,21 +3,24 @@
 .navbar {
   height: 5em;
   background-color: $primaryColor;
-  display: flex;
-  justify-content: flex-end;
-
-  .nav-links {
-    flex: 1;
-    max-width: 8em;
-  }
-
+  position: fixed;
+  z-index: 10;
   .logo {
-    flex: 1;
     color: $lightTextColor;
     font-family: 'Volkhov', serif;
     font-size: 2.4rem;
-    margin: 0.5rem 1rem;
-    justify-content: flex-start;
+    margin: 0.9rem 1rem;
+  }
+
+  .nav-links-container {
+    align-content: flex-end;
+    justify-content: flex-end;
+    display: inline-flex;
+  }
+
+  .nav-links {
+    display: inline-flex;
+    max-width: 8em;
   }
 
   .nav-links span a {
