@@ -1,3 +1,40 @@
-.contribute {
-  color: red;
+.share-container {
+  div {
+    height: 13em;
+    width: 13em;
+    margin: 20px auto;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  a {
+    height: fit-content;
+    width: fit-content;
+  }
+}
+
+#github {
+  background: #24292e url(/static/images/github-logo-white.png);
+  background-position: center;
+  background-size: contain;
+}
+
+#facebook {
+  background: #3B5998 url(/static/images/facebook-logo-white.png);
+  background-position: center;
+  background-size: contain;
+}
+
+#twitter {
+  background: #00aced url(/static/images/twitter-logo-white.png);
+  background-position: center;
+  background-size: contain;
+}
+
+#reddit {
+  background: #ff4500 url(/static/images/reddit-logo-white.png);
+  background-position: center;
+  // Damn image was too big, made it 30% smaller
+  background-size: 70%;
+  background-repeat: no-repeat; 
 }

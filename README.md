@@ -69,5 +69,5 @@ Running `npm run component -- --name footer --parent ../common` creates a `foote
 
 Because the argument to `--name` applies to the folder name **and** the actual component name, make sure to camelcase the component names.
 
-**Credits** 
+**Credits**  
 Project template acquired from https://github.com/gdi2290/NG6-starter

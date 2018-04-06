@@ -1,0 +1,51 @@
+@import "../../common/common";
+@import url(https://fonts.googleapis.com/css?family=Raleway|Playfair+Display);
+
+// pushes top of image directly below nav
+.navWhitespace {
+  width: 100%;
+  height: 5em;
+}
+.main-background {
+  background: url(/static/images/home_carrousel_1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+}
+
+.message-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: $lightTextColor;
+  padding: 30px !important;
+  height: fit-content;
+  margin: auto 0;
+  max-width: 760px !important;
+
+  h3 {
+    font-size: 4.5rem;
+    font-family: 'Playfair Display', 'Lato', serif;
+    margin: 0;
+  }
+
+  p {
+    font-family: 'Raleway', 'Lato', serif;
+    font-size: 1.8rem;
+  }
+
+  button {
+    background-color: $accentColor;
+    display: flex;
+    margin-left: auto;
+    right: 0;
+    font-size: 1.4rem;
+    border: none;
+    padding: 15px 20px;
+    transition: 600ms;
+  }
+
+  button:hover {
+    background-color: $accentColorHover;
+  }
+}

@@ -1,19 +1,24 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Lato);
+@import './grid';
 
 $primaryColor:   #7799b7;
 $accentColor:    #ff005c;
+$accentColorHover: #d40350;
 $bgColor:        #eeeeee;
 $darkBgColor:    #263238;
 $lightBgColor:   #ffffff;
 $lightTextColor: #f5f5f5;
-$darkTextColor:  #212121;
+$darkTextColor:  #374553;
+$footerColor: #c4c4c4;
 
 html {
    height: 100%;
    // browsers default to 16px for font-size,
    // so setting top-level font-size to 62.5%
    // scales 1rem to equal 10px.
-   font: 62.5% 'Roboto', sans-serif;
+   font-size: 62.5%;
+   font-family: 'Lato', sans-serif !important;
+   color: $darkTextColor;
 }
 
 body {
@@ -21,8 +26,10 @@ body {
 }
 
 section {
+    margin-bottom: 50px;
     h2 {
         font-size: 2.4rem;
+        font-weight: 900;
     }
 
     p {
