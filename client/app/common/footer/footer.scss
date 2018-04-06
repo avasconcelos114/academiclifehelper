@@ -1,0 +1,16 @@
+@import '../common';
+
+#footer {
+  div {
+    background: $footerColor;
+    height: 10em;
+  }
+
+  .footer-contents {
+    display: flex; 
+    span {
+      font-size: 1.4rem;
+      margin: auto 0;
+    }
+  }
+}
