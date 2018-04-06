@@ -1,6 +1,11 @@
 @import "../../common/common";
 @import url(https://fonts.googleapis.com/css?family=Raleway|Playfair+Display);
 
+// pushes top of image directly below nav
+.navWhitespace {
+  width: 100%;
+  height: 5em;
+}
 .main-background {
   background: url(/static/images/home_carrousel_1.jpg);
   background-repeat: no-repeat;
