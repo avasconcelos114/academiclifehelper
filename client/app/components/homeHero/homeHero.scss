@@ -12,16 +12,15 @@
   background-size: cover;
   background-position: center;
   height: 500px;
-  display: flex;
 }
 
 .message-container {
   background-color: rgba(0, 0, 0, 0.6);
-  color: $lightTextColor;
+  color: $light-text-color;
   padding: 30px !important;
   height: fit-content;
   margin: auto 0;
-  max-width: 760px !important;
+  max-width: 840px !important;
 
   h3 {
     font-size: 4.5rem;
@@ -35,9 +34,10 @@
   }
 
   button {
-    background-color: $accentColor;
+    background-color: $accent-color;
     display: flex;
     margin-left: auto;
+    margin-top: 20px;
     right: 0;
     font-size: 1.4rem;
     border: none;
@@ -46,6 +46,6 @@
   }
 
   button:hover {
-    background-color: $accentColorHover;
+    background-color: $accent-color-hover;
   }
 }

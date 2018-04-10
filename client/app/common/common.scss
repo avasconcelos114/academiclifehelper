@@ -1,24 +1,23 @@
 @import url(http://fonts.googleapis.com/css?family=Lato);
-@import './grid';
 
-$primaryColor:   #7799b7;
-$accentColor:    #ff005c;
-$accentColorHover: #d40350;
-$bgColor:        #eeeeee;
-$darkBgColor:    #263238;
-$lightBgColor:   #ffffff;
-$lightTextColor: #f5f5f5;
-$darkTextColor:  #374553;
-$footerColor: #c4c4c4;
+$primary-color:   #7799b7;
+$accent-color:    #ff005c;
+$accent-color-hover: #d40350;
+$bg-color:   #ffffff;
+$light-text-color: #f5f5f5;
+$dark-text-color:  #374553;
+$footer-color: #c4c4c4;
+
+
 
 html {
    height: 100%;
    // browsers default to 16px for font-size,
    // so setting top-level font-size to 62.5%
    // scales 1rem to equal 10px.
-   font-size: 62.5%;
+   font-size: 62.5% !important;
    font-family: 'Lato', sans-serif !important;
-   color: $darkTextColor;
+   color: $dark-text-color;
 }
 
 body {
