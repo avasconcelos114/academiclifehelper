@@ -17,7 +17,7 @@
 
 .message-container {
   background-color: rgba(0, 0, 0, 0.6);
-  color: $lightTextColor;
+  color: $light-text-color;
   padding: 30px !important;
   height: fit-content;
   margin: auto 0;
@@ -35,7 +35,7 @@
   }
 
   button {
-    background-color: $accentColor;
+    background-color: $accent-color;
     display: flex;
     margin-left: auto;
     right: 0;
@@ -46,6 +46,6 @@
   }
 
   button:hover {
-    background-color: $accentColorHover;
+    background-color: $accent-color-hover;
   }
 }
