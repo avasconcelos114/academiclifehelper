@@ -6,11 +6,15 @@
   position: fixed;
   z-index: 10;
 
+  .columns {
+    width: 100%;
+  }
+  
   .logo {
     color: $light-text-color;
     font-family: 'Volkhov', serif;
     font-size: 2.4rem;
-    margin: 0.9rem 1rem;
+    margin: 0.6rem 1rem;
   }
 
   .nav-links-container {
@@ -28,7 +32,7 @@
     color: $light-text-color;
     font-size: 1.4rem;
     text-decoration: none;
-    line-height: 3.5em;
+    line-height: 3.2em;
     padding-left: 0.6em;
   }
 }

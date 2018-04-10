@@ -12,7 +12,6 @@
   background-size: cover;
   background-position: center;
   height: 500px;
-  display: flex;
 }
 
 .message-container {
@@ -21,7 +20,7 @@
   padding: 30px !important;
   height: fit-content;
   margin: auto 0;
-  max-width: 760px !important;
+  max-width: 840px !important;
 
   h3 {
     font-size: 4.5rem;
@@ -38,6 +37,7 @@
     background-color: $accent-color;
     display: flex;
     margin-left: auto;
+    margin-top: 20px;
     right: 0;
     font-size: 1.4rem;
     border: none;
