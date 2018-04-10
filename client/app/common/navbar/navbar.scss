@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Volkhov');
 .navbar {
   height: 5em;
-  background-color: $primary-color;
+  background-color: $navbar-color;
   position: fixed;
   z-index: 10;
 
@@ -25,14 +25,24 @@
 
   .nav-links {
     display: inline-flex;
-    max-width: 8em;
+    max-width: 15em;
+    margin-left: 2.5em;
   }
 
   .nav-links span a {
     color: $light-text-color;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     text-decoration: none;
-    line-height: 3.2em;
-    padding-left: 0.6em;
+    line-height: 2.8em;
+  }
+
+  .nav-links span a.signup {
+    padding: 7px;
+    background: $accent-color;
+    cursor: pointer;
+  }
+
+  .nav-links span a.signup:hover {
+    background: $accent-color-hover;
   }
 }
