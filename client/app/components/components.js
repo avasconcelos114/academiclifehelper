@@ -8,9 +8,10 @@ import ForgotPassword from '../containers/forgotPassword/forgotPassword';
 
 // Components
 import About from './about/about';
-import CompanyInfo from './companyInfo/companyInfo'
-import Contribute from './contribute/contribute'
-import HomeHero from './homeHero/homeHero'
+import CompanyInfo from './companyInfo/companyInfo';
+import Contribute from './contribute/contribute';
+import HomeHero from './homeHero/homeHero';
+import LoginForm from './loginForm/loginForm';
 
 let componentModule = angular.module('app.components', [
   Home,
@@ -20,7 +21,8 @@ let componentModule = angular.module('app.components', [
   About,
   CompanyInfo,
   Contribute,
-  HomeHero
+  HomeHero,
+  LoginForm
 ])
 
 .name;

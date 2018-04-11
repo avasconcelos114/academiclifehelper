@@ -1,3 +1,23 @@
-<div>
-  <h1>{{ $ctrl.name }}</h1>
+<div id="{{ $ctrl.name }}" class="card">
+  <button class="google-signin"><div class="google-logo"></div>SIGN IN WITH GOOGLE</button>
+  
+  <div class="divider text-center" data-content="OR"></div>
+
+  <div class="form-group">
+      <div class="has-icon-right">
+        <input class="form-input" type="text" placeholder="Username">
+        <i class="form-icon icon icon-2x icon-check"></i>
+      </div>
+      <div class="has-icon-right">
+        <input class="form-input" type="password" placeholder="Password">
+        <i class="form-icon icon icon-2x loading"></i>
+      </div>
+      <label class="form-checkbox">
+        <input type="checkbox">
+        <i class="form-icon"></i> Remember me
+      </label>
+      <a ui-sref="home">Forgot your password?</a>
+      <br>
+      <button class="btn btn-primary">Log in</button>
+  </div>
 </div>
