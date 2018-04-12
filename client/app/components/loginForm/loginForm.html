@@ -1,5 +1,8 @@
 <div id="{{ $ctrl.name }}" class="card">
-  <button class="google-signin"><div class="google-logo"></div>SIGN IN WITH GOOGLE</button>
+  <button class="google-signin">
+    <div class="google-logo"></div>
+    <span>SIGN IN WITH GOOGLE</span>
+  </button>
   
   <div class="divider text-center" data-content="OR"></div>
 
@@ -16,7 +19,7 @@
         <input type="checkbox">
         <i class="form-icon"></i> Remember me
       </label>
-      <a ui-sref="home">Forgot your password?</a>
+      <a class="forgot-password" ui-sref="home">Forgot your password?</a>
       <br>
       <button class="btn btn-primary">Log in</button>
   </div>
