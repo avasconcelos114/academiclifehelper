@@ -12,6 +12,7 @@ import CompanyInfo from './companyInfo/companyInfo';
 import Contribute from './contribute/contribute';
 import HomeHero from './homeHero/homeHero';
 import LoginForm from './loginForm/loginForm';
+import SignUpForm from './signUpForm/signUpForm';
 
 let componentModule = angular.module('app.components', [
   Home,
@@ -22,7 +23,8 @@ let componentModule = angular.module('app.components', [
   CompanyInfo,
   Contribute,
   HomeHero,
-  LoginForm
+  LoginForm,
+  SignUpForm
 ])
 
 .name;
