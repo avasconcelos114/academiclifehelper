@@ -1,16 +1,17 @@
 <nav class="navbar container">
   <div class="columns">
-    <div class="column col-md-8 col-sm-6 col-6">
-      <div class="hide-md logo">AcademicLifeHelper</div>
-      <div class="show-md logo">ALH</div>
+    <div class="column col-md-8 col-sm-4 col-4">
+      <div ui-sref="home" class="hide-md logo">AcademicLifeHelper</div>
+      <div ui-sref="home" class="show-md logo">ALH</div>
     </div>
-    <div class="nav-links-container column col-md-4 col-sm-6 col-6">
+    <div class="nav-links-container column col-md-4 col-sm-8 col-8">
       <div class="nav-links">
-        <span><a ui-sref="home">Log in</a></span>
+        <span><a ui-sref="login">Log in</a></span>
       </div>
       <div class="nav-links">
-        <span><a ui-sref="about">Sign-up</a></span>
+        <span><a class="signup" ui-sref="login">GET STARTED</a></span>
       </div>
     </div>
   </div>
 </nav>
+<div class="navWhitespace"></div>

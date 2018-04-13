@@ -1,0 +1,90 @@
+#loginForm {
+  padding: 30px;
+  margin-top: 100px;
+  margin-bottom: 150px;
+}
+
+.btn {
+  font-size: 1.6rem !important;
+  height: 3.5rem !important;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.divider {
+  margin-bottom: 20px !important;
+}
+
+.divider[data-content]::after {
+  font-size: 1.6rem !important;
+  transform: translateY(-1.2rem) !important;
+}
+
+.forgot-password {
+  float: right;
+  font-size: 1.2rem;
+}
+
+.form-group input {
+  font-size: 1.6rem !important;
+  padding: 10px;
+  height: 45px;
+  margin-bottom: 20px;
+}
+
+.has-icon-right > .form-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  padding-right: 25px;
+}
+
+.google-signin {
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  margin-bottom: 15px;
+}
+
+.google-signin:hover {
+  background: #e9e9e9;
+}
+
+.google-signin > span {
+  font-family: 'Roboto', serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.google-logo {
+  background: url(/static/images/g-logo.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  float: left;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-check {
+  color: green;
+}
+
+.loading::after {
+  width: 1.8rem !important;
+  height: 1.8rem !important;
+  margin-left: -1rem !important;
+  margin-top: -0.8rem !important;
+}
+
+label {
+  font-size: 1.4rem;
+}
+
+.form-checkbox {
+  padding: 0.2rem 0.4rem 0.2rem 1.8rem !important;
+}
+.form-checkbox .form-icon {
+  width: 1.4rem !important;
+  height: 1.4rem !important;
+  transform: translateY(-0.2rem);
+}
