@@ -69,6 +69,14 @@
   color: green;
 }
 
+.icon-cross::before {
+  width: 1.5rem !important;
+}
+.icon-cross {
+  color: red;
+  height: 1.5rem !important;
+}
+
 .loading::after {
   width: 1.8rem !important;
   height: 1.8rem !important;
