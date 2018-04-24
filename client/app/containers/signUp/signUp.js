@@ -6,6 +6,15 @@ let signUpModule = angular.module('signUp', [
   uiRouter
 ])
 
+.config(($stateProvider) => {
+  "ngInject";
+  $stateProvider
+    .state('signUp', {
+      url: '/signUp',
+      component: 'signUp'
+    });
+})
+
 .component('signUp', signUpComponent)
 
 .name;

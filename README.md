@@ -10,8 +10,16 @@ client
 ⋅⋅⋅⋅app.js * app entry file
 ⋅⋅⋅⋅app.html * app template
 ⋅⋅⋅⋅common/ * functionality pertinent to several components propagate into this directory
-⋅⋅⋅⋅components/ * where components live
+....components/ *where components are stored
 ⋅⋅⋅⋅⋅⋅components.js * components entry file
+......loginForm/ * example of a container
+........loginForm.js * entry file
+........loginForm.component.js * directive
+........loginForm.controller.js * controller for component
+........loginForm.scss *styles to be applied in component
+........loginForm.html * html template for component
+........loginForm.spec.js * unit tests for component 
+⋅⋅⋅⋅containers/ * where the containers (screens)
 ⋅⋅⋅⋅⋅⋅home/ * home component
 ⋅⋅⋅⋅⋅⋅⋅⋅home.js * home entry file (routes, configurations, and declarations occur here)
 ⋅⋅⋅⋅⋅⋅⋅⋅home.component.js * home "directive"

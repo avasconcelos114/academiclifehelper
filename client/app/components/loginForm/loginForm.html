@@ -6,14 +6,14 @@
   
   <div class="divider text-center" data-content="OR"></div>
 
-  <div class="form-group">
+  <form name="loginForm" class="form-group">
       <div class="has-icon-right">
-        <input class="form-input" type="text" placeholder="Username">
-        <i class="form-icon icon icon-2x icon-check"></i>
+        <input ng-model="login.username" class="form-input" type="text" placeholder="Username">
+        <i ng-class="login.username.length > 4 ? 'form-icon icon icon-2x icon-check' : (login.username.length > 0 ? 'form-icon icon icon-2x icon-cross' : 'form-icon icon icon-2x')"></i>
       </div>
       <div class="has-icon-right">
-        <input class="form-input" type="password" placeholder="Password">
-        <i class="form-icon icon icon-2x loading"></i>
+        <input ng-model="login.password" class="form-input" type="password" placeholder="Password">
+        <i ng-class="login.password.length > 4 ? 'form-icon icon icon-2x icon-check' : (login.password.length > 0 ? 'form-icon icon icon-2x icon-cross' : 'form-icon icon icon-2x')"></i>
       </div>
       <label class="form-checkbox">
         <input type="checkbox">
@@ -21,6 +21,6 @@
       </label>
       <a class="forgot-password" ui-sref="home">Forgot your password?</a>
       <br>
-      <button class="btn btn-primary">Log in</button>
-  </div>
+      <button ng-click="$ctrl.alert()" class="btn btn-primary">Log in</button>
+  </form>
 </div>

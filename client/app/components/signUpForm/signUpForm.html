@@ -1,0 +1,25 @@
+<div id="{{ $ctrl.name }}" class="card">
+  <button class="google-signin">
+    <div class="google-logo"></div>
+    <span>SIGN IN WITH GOOGLE</span>
+  </button>
+  <div class="form-group">
+      <div class="has-icon-right">
+        <input ng-model="signup.username" class="form-input" type="text" placeholder="Username">
+        <i ng-class="signup.username.length > 4 ? 'form-icon icon icon-2x icon-check' : (signup.username.length > 0 ? 'form-icon icon icon-2x icon-cross' : 'form-icon icon icon-2x')"></i>
+      </div>
+      <div class="has-icon-right">
+        <input ng-model="signup.email" class="form-input" type="email" placeholder="Email">
+        <i ng-class="signup.email.length > 4 ? 'form-icon icon icon-2x icon-check' : (signup.email.length > 0 ? 'form-icon icon icon-2x icon-cross' : 'form-icon icon icon-2x')"></i>
+      </div>
+      <div class="has-icon-right">
+        <input ng-model="signup.password" class="form-input" type="password" placeholder="Password">
+        <i ng-class="signup.password.length > 4 ? 'form-icon icon icon-2x icon-check' : (signup.password.length > 0 ? 'form-icon icon icon-2x icon-cross' : 'form-icon icon icon-2x')"></i>
+      </div>
+      <div class="has-icon-right">
+        <input ng-model="signup.passwordConfirm" class="form-input" type="password" placeholder="Confirm Password">
+        <i ng-class="signup.passwordConfirm.length > 4 ? 'form-icon icon icon-2x icon-check' : (signup.passwordConfirm.length > 0 ? 'form-icon icon icon-2x icon-cross' : 'form-icon icon icon-2x')"></i>
+      </div>
+      <button ng-click="$ctrl.alert()" class="btn btn-primary">Log in</button>
+  </div>
+</div>
