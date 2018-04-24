@@ -4,8 +4,8 @@ class SignUpFormController {
   }
 
   alert() {
-    alert('Application still under development!');
-  }
+    alert('Signup completed!\nYou may log into your account now.');
+  } 
 }
 
 export default SignUpFormController;

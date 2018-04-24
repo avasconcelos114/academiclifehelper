@@ -20,6 +20,6 @@
         <input ng-model="signup.passwordConfirm" class="form-input" type="password" placeholder="Confirm Password">
         <i ng-class="signup.passwordConfirm.length > 4 ? 'form-icon icon icon-2x icon-check' : (signup.passwordConfirm.length > 0 ? 'form-icon icon icon-2x icon-cross' : 'form-icon icon icon-2x')"></i>
       </div>
-      <button ng-click="$ctrl.alert()" class="btn btn-primary">Log in</button>
+      <button ng-click="$ctrl.alert()" ui-sref="login" class="btn btn-primary">Log in</button>
   </div>
 </div>
